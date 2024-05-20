@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using insurtech.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using insurtech.EntityFrameworkCore;
 namespace insurtech.Migrations
 {
     [DbContext(typeof(insurtechDbContext))]
-    partial class insurtechDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240520205444_CreateModels")]
+    partial class CreateModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1632,26 +1635,6 @@ namespace insurtech.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            Description = "Health insurance covers medical expenses like doctor visits, hospital stays, and medications. We offer plans for individuals, families, and businesses, including short-term and supplemental options.",
-                            Name = "HealthInsurance"
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            Description = "Home insurance protects your home and belongings from risks like fire, theft, and natural disasters. Our plans cover repairs, replacements, and living expenses, ensuring peace of mind for homeowners.",
-                            Name = "HomeInsurance"
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            Description = "Motor insurance covers your vehicle against accidents, theft, and damage. Our policies offer comprehensive protection, including liability, collision, and personal injury coverage, ensuring peace of mind on the road.",
-                            Name = "MotorInsurance"
-                        });
                 });
 
             modelBuilder.Entity("insurtech.Models.FAQ", b =>
@@ -1789,17 +1772,6 @@ namespace insurtech.Migrations
                     b.ToTable("InsuranceUser");
 
                     b.UseTptMappingStrategy();
-
-                    b.HasData(
-                        new
-                        {
-                            InsuranceUserId = 1,
-                            Email = "AsmaaAsh@gmail.com",
-                            FirstName = "Asmaa",
-                            LastName = "Ash",
-                            Number = "01211236779",
-                            Password = "2052024"
-                        });
                 });
 
             modelBuilder.Entity("insurtech.Models.Notification", b =>
