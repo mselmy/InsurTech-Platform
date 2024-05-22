@@ -1,0 +1,220 @@
+<div [@routerTransition]>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1>{{ "Registration Requests" | localize }}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content px-2">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box">
+                        <span class="info-box-icon elevation-1 bgcgreen">
+                            <i class="fas fa-user-plus text-white"></i>
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">New Requests</span>
+                            <span class="info-box-number">
+                                6,350
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon elevation-1 bgcbrightgrean">
+                            <i class="fas fa-circle-check text-white"></i>
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Approved</span>
+                            <span class="info-box-number">
+                                170
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix hidden-md-up"></div>
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon elevation-1 bgcgreenygray">
+                            <i class="fas fa-solid fa-ban text-white"></i>
+                        </span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Rejected</span>
+                            <span class="info-box-number">
+                                200
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Open Requests</h3>
+                        </div>
+                        <div class="card-body">
+                            <table datatable [dtOptions]="dtOptions" class="row-border hover" id="open-request-table">
+                                <thead class="text-white bgcgreen">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Tax Number</th>
+                                        <th>Phone Number</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>5452</td>
+                                        <td>Name 1</td>
+                                        <td>1234567890</td>
+                                        <td>1234567890</td>
+                                        <td>Location 1</td>
+                                        <td>
+                                            <span class="badge badge-warning mx-1">
+                                                Pending
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-success mr-2" (click)="showApproveAlert()">
+                                                <i class="fas fa-check"></i>
+                                            </a>
+                                            <a class="btn btn-outline-danger ml-2" (click)="showDeclineAlert()">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5453</td>
+                                        <td>Name 2</td>
+                                        <td>1234567890</td>
+                                        <td>1234567890</td>
+                                        <td>Location 2</td>
+                                        <td>
+                                            <span class="badge badge-warning mx-1">
+                                                Pending
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-success mr-2" (click)="showApproveAlert()">
+                                                <i class="fas fa-check"></i>
+                                            </a>
+                                            <a class="btn btn-outline-danger ml-2" (click)="showDeclineAlert()">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5454</td>
+                                        <td>Name 3</td>
+                                        <td>1234567890</td>
+                                        <td>1234567890</td>
+                                        <td>Location 3</td>
+                                        <td>
+                                            <span class="badge badge-warning mx-1">
+                                                Pending
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-success mr-2" (click)="showApproveAlert()">
+                                                <i class="fas fa-check"></i>
+                                            </a>
+                                            <a class="btn btn-outline-danger ml-2" (click)="showDeclineAlert()">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Closed Requests</h3>
+                        </div>
+                        <div class="card-body table-responsive">
+                            <table datatable [dtOptions]="dtOptions" class="row-border hover" id="cloded-request-table">
+                                <thead class="text-white bgcgreen">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Tax Number</th>
+                                        <th>Phone Number</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>5462</td>
+                                        <td>Name 1</td>
+                                        <td>1234567890</td>
+                                        <td>1234567890</td>
+                                        <td>Location 1</td>
+                                        <td>
+                                            <span class="badge badge-success mx-1">
+                                                Approved
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-info">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5463</td>
+                                        <td>Name 1</td>
+                                        <td>1234567890</td>
+                                        <td>1234567890</td>
+                                        <td>Location 1</td>
+                                        <td>
+                                            <span class="badge badge-danger mx-1">
+                                                Rejected
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-info">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5452</td>
+                                        <td>Name 1</td>
+                                        <td>1234567890</td>
+                                        <td>1234567890</td>
+                                        <td>Location 1</td>
+                                        <td>
+                                            <span class="badge badge-success mx-1">
+                                                Approved
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-info">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
