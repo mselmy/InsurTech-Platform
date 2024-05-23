@@ -1,5 +1,4 @@
-﻿using Abp.Domain.Entities;
-using insurtech.Models;
+﻿using insurtech.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -14,7 +13,11 @@ namespace insurtech.Configuration
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
-            builder.Property(a => a.NationalId).HasAnnotation("RegularExpression", @"^\d{14}$");
+            builder.HasMany(u => u.Feedbacks)
+                  .WithOne(f => f.Customer)
+                  .HasForeignKey(f => f.CustomerId);
+
+            builder.Property(a=>a.NationalId).HasAnnotation("RegularExpression", @"^\d{14}$");
         }
     }
 }

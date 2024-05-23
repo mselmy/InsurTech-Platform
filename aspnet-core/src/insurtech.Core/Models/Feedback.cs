@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Abp.Domain.Entities;
+using insurtech.Authorization.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +12,12 @@ namespace insurtech.Models
     {
         Great , Good , Poor
     }
-    public class Feedback
+    public class Feedback : Entity<long>
     {
-        public int FeedbackId { get; set; }
+        //public long FeedbackId { get; set; }
         public Rating Rating { get; set; }
         public string Comment { get; set; }
-        public InsuranceUser User { get; set; }
-        public int InsuranceUserId { get; set; }
+        public long CustomerId { get; set; }
+        public Customer Customer { get; set; }
     }
 }

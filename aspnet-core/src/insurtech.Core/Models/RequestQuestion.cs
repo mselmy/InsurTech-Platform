@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Abp.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace insurtech.Models
 {
-    public class RequestQuestion
+    public class RequestQuestion :Entity<long>
     {
-        public int QuestionId { get; set; }
+        public long QuestionId { get; set; }
         public Question Question { get; set; }
-        public int RequestId { get; set; }
+        public long RequestId { get; set; }
         public Request Request { get; set; }
         public string Answer { get; set; }
     }

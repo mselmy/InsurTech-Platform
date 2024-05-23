@@ -18,7 +18,17 @@ namespace insurtech.EntityFrameworkCore.Repositories
         {
         }
 
-        // Add your common methods for all repositories
+        // Add your common methods for all repositories 
+
+
+        //Asmaa
+        //Implement from I
+        //getAll()
+        //getById(id)
+        //insert(T entity)
+        //update(T entity)
+        //Delete(id)
+
     }
 
     /// <summary>

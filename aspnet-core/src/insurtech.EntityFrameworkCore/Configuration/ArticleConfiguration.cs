@@ -15,6 +15,9 @@ namespace insurtech.Configuration
         {
             builder.Property(a => a.Title).HasAnnotation("MinLength", 3);
             builder.Property(a => a.Content).HasAnnotation("MinLength", 50);
+
+
+           
         }
     }
 }

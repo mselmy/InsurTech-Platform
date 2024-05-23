@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Abp.Domain.Entities;
+using insurtech.Authorization.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,16 +12,16 @@ namespace insurtech.Models
     {
         basic , Standard , Premium
     }
-    public class InsurancePlan
+    public class InsurancePlan : Entity<long>
     {
-        public int InsurancePlanId { get; set; }
+        //public long InsurancePlanId { get; set; }
         public decimal YearlyCoverage { get; set; }
         public InsurancePlanLevel Level { get; set; }
-        public int CategoryId { get; set; }
+        public long CategoryId { get; set; }
         public Category Category { get; set; }
         public decimal Quotation { get; set; }
-        public int InsuranceUserId { get; set; }
-        public virtual InsuranceUser User { get; set; }
+        public long CompanyId { get; set; }
+        public Company Company { get; set; }
         public ICollection<Request> Requests { get; set; }
     }
 }
