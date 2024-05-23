@@ -13,7 +13,15 @@ namespace insurtech.Configuration
     {
         public void Configure(EntityTypeBuilder<RequestQuestion> builder)
         {
-            builder.HasKey(a => new { a.QuestionId, a.RequestId });
+            builder.HasOne(a => a.Request)
+              .WithMany(u => u.RequestQuestions)
+              .HasForeignKey(a => a.Id);
+
+            builder.HasOne(a => a.Question)
+              .WithMany(u => u.RequestQuestions)
+              .HasForeignKey(a => a.Id);
+
+            builder.HasIndex(a => new { a.QuestionId, a.RequestId }).IsUnique();
         }
     }
 }

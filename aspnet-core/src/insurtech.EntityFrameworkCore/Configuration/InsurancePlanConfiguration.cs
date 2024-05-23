@@ -17,6 +17,14 @@ namespace insurtech.Configuration
             builder.Property(a => a.Quotation).HasColumnType("decimal(18,2)");
 
             builder.UseTptMappingStrategy();
+
+            builder.HasOne(a => a.Company)
+              .WithMany(u => u.InsurancePlans)
+              .HasForeignKey(a => a.CompanyId);
+
+            builder.HasOne(a => a.Category)
+              .WithMany(u => u.InsurancePlans)
+              .HasForeignKey(a => a.CategoryId);
         }
     }
 }

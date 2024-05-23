@@ -14,8 +14,8 @@ namespace insurtech.EntityFrameworkCore
         //public DbSet<Users> Users { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Company> Companies { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Company> companies { get; set; }
         public DbSet<FAQ> FAQs { get; set; }
         public DbSet<Feedback> feedbacks { get; set; }
         public DbSet<HealthInsurancePlan> HealthInsurancePlans { get; set; }
@@ -37,5 +37,6 @@ namespace insurtech.EntityFrameworkCore
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
         }
+       
     }
 }

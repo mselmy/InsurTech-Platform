@@ -9,15 +9,14 @@ namespace insurtech.Models
 {
     public enum CompanyStatus
     {
-        pending,reject,Accepted
+        rejected,accepted,pending
     }
-    public class Company : InsuranceUser
+    public class Company : User
     {
-        public string City { get; set; }
-        public string Governorate { get; set; }
-        public string Street { get; set; }
         public CompanyStatus Status { get; set; }
         public string TaxNumber { get; set; }
-        public ICollection<InsurancePlan> InsurancePlans { get; set;} = new List<InsurancePlan>();
+        public string Location { get; set; }
+        public virtual ICollection<InsurancePlan> InsurancePlans { get; set; } = new List<InsurancePlan>();
+
     }
 }
