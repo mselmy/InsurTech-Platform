@@ -1,4 +1,5 @@
-﻿using insurtech.Models;
+﻿using Abp.Application.Services.Dto;
+using insurtech.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace insurtech.HomeInsurancePlan.DTO
 {
-    public class HomeInsurancePlanListDTO
+    public class HomeInsurancePlanListDTO : EntityDto<long>
     {
         public decimal YearlyCoverage { get; set; }
         public InsurancePlanLevel Level { get; set; }
