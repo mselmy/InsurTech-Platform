@@ -9,14 +9,13 @@ using System.Threading.Tasks;
 
 namespace insurtech.Configuration
 {
-    internal class FAQConfiguration : IEntityTypeConfiguration<FAQ>
+    internal class FeedbackConfiguration : IEntityTypeConfiguration<Feedback>
     {
-        public void Configure(EntityTypeBuilder<FAQ> builder)
+        public void Configure(EntityTypeBuilder<Feedback> builder)
         {
-            builder.Property(a => a.Answer).HasAnnotation("MinLength", 3);
-            builder.Property(a => a.Body).HasAnnotation("MinLength", 3);
-
-           
+            builder.HasOne(f => f.Customer)
+               .WithMany(u => u.Feedbacks)
+               .HasForeignKey(f => f.CustomerId);
         }
     }
 }
