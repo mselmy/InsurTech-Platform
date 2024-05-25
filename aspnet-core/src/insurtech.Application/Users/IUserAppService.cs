@@ -14,5 +14,9 @@ namespace insurtech.Users
         Task ChangeLanguage(ChangeUserLanguageDto input);
 
         Task<bool> ChangePassword(ChangePasswordDto input);
+
+        [RemoteService(false)]
+        Task VerifyEmail(long userId, string code);
+
     }
 }

@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace insurtech.Controllers
 {
-    public class AccountController : AbpController
+    public class AccountController : insurtechControllerBase
     {
+
+    public AccountController()
+        {
+
+        }
+
 
     }
 }

@@ -246,6 +246,26 @@ namespace insurtech.Users
 
             return true;
         }
+
+        public Task VerifyEmail(EntityDto<long> user, string token)
+        {
+            var userEntity = Repository.Get(user.Id);
+            
+            if (userEntity == null)
+            {
+                throw new UserFriendlyException("User not found!");
+            }
+
+            if (userEntity.EmailConfirmationCode != token)
+            {
+                throw new UserFriendlyException("Invalid token!");
+            }
+
+            userEntity.IsEmailConfirmed = true;
+            userEntity.EmailConfirmationCode = null;
+
+            return Task.CompletedTask;
+        }
     }
 }
 

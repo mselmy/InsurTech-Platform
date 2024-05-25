@@ -7,6 +7,7 @@ using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
 using Abp.IdentityFramework;
+using Abp.Net.Mail;
 using Castle.Components.DictionaryAdapter.Xml;
 using insurtech.Authorization.Users;
 using insurtech.Companies.Dto;
@@ -21,10 +22,14 @@ namespace insurtech.Companies
     {
 
         private readonly UserManager _userManager;
+        private readonly IEmailSender _emailSender;
 
-        public CompanyAppService(IRepository<Company, long> repository, UserManager userManager) : base(repository)
+        public CompanyAppService(IRepository<Company, long> repository, UserManager userManager
+            , IEmailSender emailSender
+            ) : base(repository)
         {
             _userManager = userManager;
+            _emailSender = emailSender;
 
         }
 
@@ -40,7 +45,7 @@ namespace insurtech.Companies
                 var company = MapToEntity(input);
 
                 CheckErrors(await _userManager.CreateAsync(company, company.Password));
-                //await Repository.InsertAsync(company);
+                await _emailSender.SendAsync(company.EmailAddress, "Your Password", company.Password);
                 await CurrentUnitOfWork.SaveChangesAsync();
                 return MapToEntityDto(company);
             }

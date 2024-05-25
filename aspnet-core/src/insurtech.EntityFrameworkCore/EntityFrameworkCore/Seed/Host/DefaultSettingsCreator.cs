@@ -26,8 +26,14 @@ namespace insurtech.EntityFrameworkCore.Seed.Host
             }
 
             // Emailing
-            AddSettingIfNotExists(EmailSettingNames.DefaultFromAddress, "admin@mydomain.com", tenantId);
-            AddSettingIfNotExists(EmailSettingNames.DefaultFromDisplayName, "mydomain.com mailer", tenantId);
+            AddSettingIfNotExists(EmailSettingNames.DefaultFromAddress, "myInsureTech@outlook.com", tenantId);
+            AddSettingIfNotExists(EmailSettingNames.DefaultFromDisplayName, "InsureTech.com");
+            AddSettingIfNotExists(EmailSettingNames.Smtp.Host, "smtp-mail.outlook.com");
+            AddSettingIfNotExists(EmailSettingNames.Smtp.Port, "465");
+            AddSettingIfNotExists(EmailSettingNames.Smtp.UserName, "myInsureTech@outlook.com");
+            AddSettingIfNotExists(EmailSettingNames.Smtp.Password, "Ash@1234");
+            AddSettingIfNotExists(EmailSettingNames.Smtp.EnableSsl, "true"); // EnableSsl is true for STARTTLS
+            //AddSettingIfNotExists(EmailSettingNames.Smtp.UseDefaultCredentials, "false", tenantId);
 
             // Languages
             AddSettingIfNotExists(LocalizationSettingNames.DefaultLanguage, "en", tenantId);

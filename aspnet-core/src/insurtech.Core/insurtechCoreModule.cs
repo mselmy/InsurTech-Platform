@@ -1,4 +1,6 @@
-﻿using Abp.Localization;
+﻿using Abp.Configuration.Startup;
+using Abp.Localization;
+using Abp.MailKit;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using Abp.Runtime.Security;
@@ -14,7 +16,7 @@ using insurtech.Timing;
 
 namespace insurtech
 {
-    [DependsOn(typeof(AbpZeroCoreModule))]
+    [DependsOn(typeof(AbpZeroCoreModule),typeof(AbpMailKitModule))]
     public class insurtechCoreModule : AbpModule
     {
         public override void PreInitialize()
@@ -40,6 +42,9 @@ namespace insurtech
             
             Configuration.Settings.SettingEncryptionConfiguration.DefaultPassPhrase = insurtechConsts.DefaultPassPhrase;
             SimpleStringCipher.DefaultPassPhrase = insurtechConsts.DefaultPassPhrase;
+
+            Configuration.ReplaceService<IMailKitSmtpBuilder, MyMailKitSmtpBuilder>();
+
         }
 
         public override void Initialize()
