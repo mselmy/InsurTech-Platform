@@ -38,12 +38,19 @@ import { SidebarComponent } from './layout/sidebar.component';
 import { SidebarLogoComponent } from './layout/sidebar-logo.component';
 import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
+import { RegistrationRequestsComponent } from './registration-requests/registration-requests.component';
+// RegistrationRequestsComponent
+import { ButtonModule } from 'primeng/button';
+import { DataTablesModule } from 'angular-datatables';
+
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         AboutComponent,
+        // registration-requests
+        RegistrationRequestsComponent,
         // tenants
         TenantsComponent,
         CreateTenantDialogComponent,
@@ -83,6 +90,8 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
         ServiceProxyModule,
         SharedModule,
         NgxPaginationModule,
+        DataTablesModule,
+        ButtonModule,
     ],
     providers: []
 })
