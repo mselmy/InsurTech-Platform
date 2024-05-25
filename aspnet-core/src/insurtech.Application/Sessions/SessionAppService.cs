@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Abp.Auditing;
 using insurtech.Sessions.Dto;
@@ -10,27 +11,35 @@ namespace insurtech.Sessions
         [DisableAuditing]
         public async Task<GetCurrentLoginInformationsOutput> GetCurrentLoginInformations()
         {
-            var output = new GetCurrentLoginInformationsOutput
+            try
             {
-                Application = new ApplicationInfoDto
+
+                var output = new GetCurrentLoginInformationsOutput
                 {
-                    Version = AppVersionHelper.Version,
-                    ReleaseDate = AppVersionHelper.ReleaseDate,
-                    Features = new Dictionary<string, bool>()
+                    Application = new ApplicationInfoDto
+                    {
+                        Version = AppVersionHelper.Version,
+                        ReleaseDate = AppVersionHelper.ReleaseDate,
+                        Features = new Dictionary<string, bool>()
+                    }
+                };
+
+                if (AbpSession.TenantId.HasValue)
+                {
+                    output.Tenant = ObjectMapper.Map<TenantLoginInfoDto>(await GetCurrentTenantAsync());
                 }
-            };
 
-            if (AbpSession.TenantId.HasValue)
+                if (AbpSession.UserId.HasValue)
+                {
+                    output.User = ObjectMapper.Map<UserLoginInfoDto>(await GetCurrentUserAsync());
+                }
+
+                return output;
+            }catch(Exception e)
             {
-                output.Tenant = ObjectMapper.Map<TenantLoginInfoDto>(await GetCurrentTenantAsync());
-            }
+                throw new Exception("ex:", e);
 
-            if (AbpSession.UserId.HasValue)
-            {
-                output.User = ObjectMapper.Map<UserLoginInfoDto>(await GetCurrentUserAsync());
             }
-
-            return output;
         }
     }
 }

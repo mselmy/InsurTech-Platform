@@ -19,6 +19,7 @@ using Microsoft.OpenApi.Models;
 using System.IO;
 using insurtech.HealthInsurancePlan.HealthInsurancePlanDTO;
 using insurtech.MotorInsurancePlan.MotortInsurancePlanDTO;
+using insurtech.Sessions.Dto;
 
 namespace insurtech.Web.Host.Startup
 {
@@ -46,8 +47,10 @@ namespace insurtech.Web.Host.Startup
             });
 
 
-            services.AddAutoMapper(typeof(HealthInsurancePlanMapProfile)); // Registers all profiles in the assembly
-            services.AddAutoMapper(typeof(MotorInsurancePlanProfile)); // Registers all profiles in the assembly
+            services.AddAutoMapper(typeof(UserLoginInfoProfile)); 
+            services.AddAutoMapper(typeof(HealthInsurancePlanMapProfile)); 
+            services.AddAutoMapper(typeof(MotorInsurancePlanProfile)); 
+            services.AddAutoMapper(typeof(TenantLoginProfile)); 
 
 
             IdentityRegistrar.Register(services);
