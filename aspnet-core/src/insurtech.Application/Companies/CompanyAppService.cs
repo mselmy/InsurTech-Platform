@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
 using Abp.IdentityFramework;
+using Abp.Net.Mail;
 using Castle.Components.DictionaryAdapter.Xml;
 using insurtech.Authorization.Users;
 using insurtech.Companies.Dto;
@@ -20,12 +23,15 @@ namespace insurtech.Companies
     {
 
         private readonly UserManager _userManager;
+        private readonly IEmailSender _emailSender;
 
-        public CompanyAppService(IRepository<Company, long> repository,UserManager userManager) : base(repository)
+        public CompanyAppService(IRepository<Company, long> repository,UserManager userManager, IEmailSender emailSender) : base(repository)
         {
             _userManager = userManager;
+			_emailSender= emailSender;
 
-        }
+
+		}
 
 
 
@@ -38,14 +44,36 @@ namespace insurtech.Companies
 
                 CheckErrors(await _userManager.CreateAsync(company,company.Password));
 
+				//await Repository.InsertAsync(company);
+				MailMessage mail = new MailMessage();
+
+				mail.From = new MailAddress("myInsureTech@outlook.com");
+                mail.Subject = "welcome To InsureTech";
+                mail.Body = "hello";
+                mail.IsBodyHtml = true;
+                mail.To.Add(new MailAddress(company.EmailAddress));
+
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp-mail.outlook.com",
+                    //smtp.Host = "mohraapp.com";
+                    EnableSsl = true
+                };
+                NetworkCredential NetworkCred = new NetworkCredential();
+                NetworkCred.UserName = "myInsureTech@outlook.com";
+                NetworkCred.Password = "Ash@1234";
+
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+
+                await smtp.SendMailAsync(mail);
 
 
 
-                //await Repository.InsertAsync(company);
+				await CurrentUnitOfWork.SaveChangesAsync();
 
-                await CurrentUnitOfWork.SaveChangesAsync();
 
-                return MapToEntityDto(company);
+				return MapToEntityDto(company);
             }
             catch (Exception ex) {
 

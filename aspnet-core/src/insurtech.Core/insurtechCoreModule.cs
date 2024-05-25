@@ -1,4 +1,5 @@
 ﻿using Abp.Localization;
+using Abp.MailKit;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using Abp.Runtime.Security;
@@ -14,7 +15,7 @@ using insurtech.Timing;
 
 namespace insurtech
 {
-    [DependsOn(typeof(AbpZeroCoreModule))]
+    [DependsOn(typeof(AbpZeroCoreModule), typeof(AbpMailKitModule))]    
     public class insurtechCoreModule : AbpModule
     {
         public override void PreInitialize()
