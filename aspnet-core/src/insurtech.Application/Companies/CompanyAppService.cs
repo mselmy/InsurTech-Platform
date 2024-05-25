@@ -13,19 +13,22 @@ using insurtech.Companies.Dto;
 using insurtech.Models;
 using insurtech.Users.Dto;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.VisualBasic;
 
 namespace insurtech.Companies
 {
-    public class CompanyAppService : AsyncCrudAppService<Company, CompanyDto, long, PagedAndSortedResultRequestDto, CreateCompanyInput, CompanyDto>
+    public class CompanyAppService : AsyncCrudAppService<Company, CompanyDto, long, PagedAndSortedResultRequestDto, CreateCompanyInput, CompanyDto>, ICompanyAppService
     {
 
         private readonly UserManager _userManager;
 
-        public CompanyAppService(IRepository<Company, long> repository,UserManager userManager) : base(repository)
+        public CompanyAppService(IRepository<Company, long> repository, UserManager userManager) : base(repository)
         {
             _userManager = userManager;
 
         }
+
+
 
 
 
@@ -36,21 +39,16 @@ namespace insurtech.Companies
             {
                 var company = MapToEntity(input);
 
-                CheckErrors(await _userManager.CreateAsync(company,company.Password));
-
-
-
-
+                CheckErrors(await _userManager.CreateAsync(company, company.Password));
                 //await Repository.InsertAsync(company);
-
                 await CurrentUnitOfWork.SaveChangesAsync();
-
                 return MapToEntityDto(company);
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
 
                 Console.WriteLine(ex);
-                throw new Exception($"ex {ex}"); 
+                throw new Exception($"ex {ex}");
             }
         }
 
@@ -66,6 +64,14 @@ namespace insurtech.Companies
             identityResult.CheckErrors(LocalizationManager);
         }
 
+        public async Task Accept(EntityDto<long> company)
+        {
+            await Repository.UpdateAsync(company.Id, async (c) => c.Status = CompanyStatus.accepted);
+        }
 
+        public async Task Reject(EntityDto<long> company)
+        {
+            await Repository.UpdateAsync(company.Id, async (c) => c.Status = CompanyStatus.rejected);
+        }
     }
 }
