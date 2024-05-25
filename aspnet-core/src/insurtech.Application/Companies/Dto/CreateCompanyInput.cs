@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace insurtech.Companies.Dto
@@ -38,5 +39,11 @@ namespace insurtech.Companies.Dto
         [Required]
 
         public string Location { get; set; }
+
+        [JsonIgnore]
+        public string Surname { get; set; } = "Company";
+
+        [JsonIgnore]
+        public CompanyStatus Status { get; set; } = CompanyStatus.pending;
     }
 }
