@@ -12,7 +12,7 @@ namespace insurtech.Models
     {
         //public long RequestId { get; set; }
         public long CustomerId { get; set; }
-        public User Customer { get; set; }
+        public virtual User Customer { get; set; }
         public long InsurancePlanId { get; set; }
         public virtual InsurancePlan InsurancePlan { get; set; }
         public ICollection<RequestQuestion> RequestQuestions { get; set; } = new List<RequestQuestion>();
