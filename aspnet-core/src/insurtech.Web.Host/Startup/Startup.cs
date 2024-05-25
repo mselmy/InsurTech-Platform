@@ -18,6 +18,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.IO;
 using insurtech.HealthInsurancePlan;
+using insurtech.HomeInsurancePlan.DTO;
+using insurtech.HomeInsurancePlan.Resolver;
 
 namespace insurtech.Web.Host.Startup
 {
@@ -46,6 +48,10 @@ namespace insurtech.Web.Host.Startup
 
 
             services.AddAutoMapper(typeof(HealthInsurancePlanMapProfile)); // Registers all profiles in the assembly
+                                                                           // Add AutoMapper
+            services.AddAutoMapper(typeof(HomeInsurancePlanMapProfile));
+
+           
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);

@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace insurtech.HomeInsurancePlan
 {
-    public class HomeInsurancePlanService : CrudAppService<insurtech.Models.HomeInsurancePlan,AddEditHomeInsurancePlanDTO,long,HomeInsurancePlanListDTO,AddEditHomeInsurancePlanDTO,AddEditHomeInsurancePlanDTO,HomeInsurancePlanListDTO>
+    public class HomeInsurancePlanService : CrudAppService<insurtech.Models.HomeInsurancePlan,HomeInsurancePlanListDTO,long,HomeInsurancePlanListDTO,AddEditHomeInsurancePlanDTO,AddEditHomeInsurancePlanDTO,HomeInsurancePlanListDTO>
     {
         public HomeInsurancePlanService(IRepository<insurtech.Models.HomeInsurancePlan, long> repository) : base(repository)
         {
               
         }
-        public override AddEditHomeInsurancePlanDTO Create(AddEditHomeInsurancePlanDTO input)
+        public override HomeInsurancePlanListDTO Create(AddEditHomeInsurancePlanDTO input)
         {
             try
             {

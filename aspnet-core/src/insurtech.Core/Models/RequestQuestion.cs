@@ -10,9 +10,9 @@ namespace insurtech.Models
     public class RequestQuestion :Entity<long>
     {
         public long QuestionId { get; set; }
-        public Question Question { get; set; }
+        public virtual Question Question { get; set; }
         public long RequestId { get; set; }
-        public Request Request { get; set; }
+        public virtual Request Request { get; set; }
         public string Answer { get; set; }
     }
 }

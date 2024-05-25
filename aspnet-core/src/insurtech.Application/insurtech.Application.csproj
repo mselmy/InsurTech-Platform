@@ -12,10 +12,15 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\insurtech.Core\insurtech.Core.csproj" />
+    <ProjectReference Include="..\insurtech.EntityFrameworkCore\insurtech.EntityFrameworkCore.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MotorInsurancePlan\MotorInsurancePlanDTO\" />
-    <Folder Include="NewFolder\" />
   </ItemGroup>
 </Project>

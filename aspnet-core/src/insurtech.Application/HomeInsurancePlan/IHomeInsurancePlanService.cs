@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace insurtech.HomeInsurancePlan
 {
-    public interface IHomeInsurancePlanService : ICrudAppService<AddEditHomeInsurancePlanDTO,long,HomeInsurancePlanFilterDTO,AddEditHomeInsurancePlanDTO,AddEditHomeInsurancePlanDTO,HomeInsurancePlanListDTO>
+    public interface IHomeInsurancePlanService : ICrudAppService<HomeInsurancePlanListDTO, long,HomeInsurancePlanListDTO,AddEditHomeInsurancePlanDTO,AddEditHomeInsurancePlanDTO,HomeInsurancePlanListDTO>
     {
       
     }

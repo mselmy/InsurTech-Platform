@@ -5,18 +5,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using insurtech.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using insurtech.HomeInsurancePlan.Resolver;
 
 namespace insurtech.HomeInsurancePlan.DTO
 {
     public class HomeInsurancePlanMapProfile : Profile
     {
+        
+
         public HomeInsurancePlanMapProfile()
         {
-            CreateMap<insurtech.Models.HomeInsurancePlan,AddEditHomeInsurancePlanDTO>().ReverseMap();
+            ConfigureMappings();
+        }
 
-            CreateMap<insurtech.Models.HomeInsurancePlan, HomeInsurancePlanListDTO>()
-                .ForMember(a => a.CompanyName, b => b.MapFrom(b => b.Company.Name))
-                .ForMember(c => c.CategoryName, b => b.MapFrom(b => b.Category.Name));
+        private void ConfigureMappings()
+        {
+            CreateMap<Models.HomeInsurancePlan, AddEditHomeInsurancePlanDTO>().ReverseMap();
+
+            CreateMap<Models.HomeInsurancePlan, HomeInsurancePlanListDTO>()
+                .ForMember(dest => dest.CompanyName, opt => opt.MapFrom<CompanyNameResolver>())
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom<CategoryNameResolver>())
+                .ReverseMap();
         }
     }
 }
