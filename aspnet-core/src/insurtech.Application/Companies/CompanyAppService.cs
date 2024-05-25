@@ -44,18 +44,14 @@ namespace insurtech.Companies
 
                 CheckErrors(await _userManager.CreateAsync(company,company.Password));
 
-
-
-
 				//await Repository.InsertAsync(company);
 				MailMessage mail = new MailMessage();
 
 				mail.From = new MailAddress("myInsureTech@outlook.com");
-                mail.Subject = "welcome";
+                mail.Subject = "welcome To InsureTech";
                 mail.Body = "hello";
                 mail.IsBodyHtml = true;
                 mail.To.Add(new MailAddress(company.EmailAddress));
-            //    await _emailSender.SendAsync(mail);
 
                 var smtp = new SmtpClient
                 {
@@ -67,7 +63,6 @@ namespace insurtech.Companies
                 NetworkCred.UserName = "myInsureTech@outlook.com";
                 NetworkCred.Password = "Ash@1234";
 
-                //smtp.UseDefaultCredentials = false;
                 smtp.Credentials = NetworkCred;
                 smtp.Port = 587;
 
