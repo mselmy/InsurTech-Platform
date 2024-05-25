@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace insurtech.HealthInsurancePlan
+namespace insurtech.HealthInsurancePlan.HealthInsurancePlanDTO
 {
-    public class HealthInsurancePlanMapProfile:Profile
+    public class HealthInsurancePlanMapProfile : Profile
     {
         public HealthInsurancePlanMapProfile()
         {
-            CreateMap<insurtech.Models.HealthInsurancePlan, HealthInsurancePlanDTO.HealthInsurancePlanDTO>().ReverseMap();
+            CreateMap<Models.HealthInsurancePlan, HealthInsurancePlanDTO>().ReverseMap();
         }
     }
 }

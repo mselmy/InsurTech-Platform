@@ -17,7 +17,8 @@ using Abp.AspNetCore.SignalR.Hubs;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.IO;
-using insurtech.HealthInsurancePlan;
+using insurtech.HealthInsurancePlan.HealthInsurancePlanDTO;
+using insurtech.MotorInsurancePlan.MotortInsurancePlanDTO;
 
 namespace insurtech.Web.Host.Startup
 {
@@ -46,6 +47,8 @@ namespace insurtech.Web.Host.Startup
 
 
             services.AddAutoMapper(typeof(HealthInsurancePlanMapProfile)); // Registers all profiles in the assembly
+            services.AddAutoMapper(typeof(MotorInsurancePlanProfile)); // Registers all profiles in the assembly
+
 
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);

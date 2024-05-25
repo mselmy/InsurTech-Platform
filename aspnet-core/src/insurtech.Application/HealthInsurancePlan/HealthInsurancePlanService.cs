@@ -22,8 +22,6 @@ namespace insurtech.HealthInsurancePlan
         }
         public override HealthInsurancePlanDTO.HealthInsurancePlanDTO Create(HealthInsurancePlanDTO.HealthInsurancePlanDTO input)
         {
-
-
             try
             {
                 

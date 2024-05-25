@@ -12,11 +12,17 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\insurtech.Core\insurtech.Core.csproj" />
+    <Compile Remove="HomeInsurancePlan\HomeInsurancePlanDTO\**" />
+    <Compile Remove="MotorInsurancePlan\MotorInsurancePlanDTO\**" />
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="HomeInsurancePlan\HomeInsurancePlanDTO\**" />
+    <EmbeddedResource Remove="MotorInsurancePlan\MotorInsurancePlanDTO\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="HomeInsurancePlan\HomeInsurancePlanDTO\**" />
+    <None Remove="MotorInsurancePlan\MotorInsurancePlanDTO\**" />
+    <None Remove="NewFolder\**" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="HomeInsurancePlan\HomeInsurancePlanDTO\" />
-    <Folder Include="MotorInsurancePlan\MotorInsurancePlanDTO\" />
-    <Folder Include="NewFolder\" />
+    <ProjectReference Include="..\insurtech.Core\insurtech.Core.csproj" />
   </ItemGroup>
 </Project>
