@@ -9,8 +9,7 @@ using Abp.Application.Services.Dto;
 
 namespace insurtech.Companies
 {
-    public interface ICompanyAppService : IAsyncCrudAppService<CompanyDto, long, PagedAndSortedResultRequestDto, CreateCompanyInput, CompanyDto>
+    public interface ICompanyAppService : ICrudAppService<CompanyDto, long, PagedAndSortedResultRequestDto, CreateCompanyInput, CompanyDto>
     {
-        void CreateCompany(CreateCompanyInput input);
     }
 }
