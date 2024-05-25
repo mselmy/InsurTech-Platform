@@ -17,6 +17,7 @@ using Abp.AspNetCore.SignalR.Hubs;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.IO;
+using insurtech.HealthInsurancePlan;
 
 namespace insurtech.Web.Host.Startup
 {
@@ -43,6 +44,9 @@ namespace insurtech.Web.Host.Startup
                 options.Filters.Add(new AbpAutoValidateAntiforgeryTokenAttribute());
             });
 
+
+            services.AddAutoMapper(typeof(HealthInsurancePlanMapProfile)); // Registers all profiles in the assembly
+
             IdentityRegistrar.Register(services);
             AuthConfigurer.Configure(services, _appConfiguration);
 
@@ -65,7 +69,6 @@ namespace insurtech.Web.Host.Startup
                         .AllowCredentials()
                 )
             );
-
             // Swagger - Enable this line and the related lines in Configure method to enable swagger UI
             ConfigureSwagger(services);
 
