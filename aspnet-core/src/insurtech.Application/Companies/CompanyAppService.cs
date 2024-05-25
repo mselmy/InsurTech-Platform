@@ -6,37 +6,28 @@ using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
+using Abp.IdentityFramework;
 using Castle.Components.DictionaryAdapter.Xml;
 using insurtech.Authorization.Users;
 using insurtech.Companies.Dto;
 using insurtech.Models;
 using insurtech.Users.Dto;
+using Microsoft.AspNetCore.Identity;
 
 namespace insurtech.Companies
 {
     public class CompanyAppService : AsyncCrudAppService<Company, CompanyDto, long, PagedAndSortedResultRequestDto, CreateCompanyInput, CompanyDto>
     {
-        public CompanyAppService(IRepository<Company, long> repository) : base(repository)
+
+        private readonly UserManager _userManager;
+
+        public CompanyAppService(IRepository<Company, long> repository,UserManager userManager) : base(repository)
         {
+            _userManager = userManager;
 
         }
 
 
-        public override Task<PagedResultDto<CompanyDto>> GetAllAsync(PagedAndSortedResultRequestDto input)
-        {
-
-            try
-            {
-                var companies = Repository.GetAll();
-                return Task.FromResult(new PagedResultDto<CompanyDto>(companies.Count(), ObjectMapper.Map<List<CompanyDto>>(companies)));
-               
-
-
-            }
-
-    
-            catch (Exception ex) { throw new Exception($"ex {ex}"); }
-        }
 
 
         public override async Task<CompanyDto> CreateAsync(CreateCompanyInput input)
@@ -44,11 +35,23 @@ namespace insurtech.Companies
             try
             {
                 var company = MapToEntity(input);
-                await Repository.InsertAsync(company);
+
+                CheckErrors(await _userManager.CreateAsync(company,company.Password));
+
+
+
+
+                //await Repository.InsertAsync(company);
+
                 await CurrentUnitOfWork.SaveChangesAsync();
+
                 return MapToEntityDto(company);
             }
-            catch (Exception ex) { throw new Exception($"ex {ex}"); }
+            catch (Exception ex) {
+
+                Console.WriteLine(ex);
+                throw new Exception($"ex {ex}"); 
+            }
         }
 
         protected override Company MapToEntity(CreateCompanyInput createCompanyInput)
@@ -56,6 +59,11 @@ namespace insurtech.Companies
             var company = ObjectMapper.Map<Company>(createCompanyInput);
             company.SetNormalizedNames();
             return company;
+        }
+
+        protected virtual void CheckErrors(IdentityResult identityResult)
+        {
+            identityResult.CheckErrors(LocalizationManager);
         }
 
 

@@ -12,7 +12,7 @@ namespace insurtech.Companies.Dto
     {
         public CompanyMapProfile()
         {
-            CreateMap<Company, CompanyDto>();
+            CreateMap<Company, CompanyDto>().ReverseMap();
             CreateMap<CreateCompanyInput, Company>();
             //CreateMap<Company, CreateCompanyOutput>();
         }
