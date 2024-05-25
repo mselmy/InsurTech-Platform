@@ -4,7 +4,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Abp.Authorization;
 using Abp.Authorization.Users;
 using Abp.MultiTenancy;
@@ -14,6 +17,10 @@ using insurtech.Authorization;
 using insurtech.Authorization.Users;
 using insurtech.Models.TokenAuth;
 using insurtech.MultiTenancy;
+using Microsoft.AspNetCore.Identity;
+using insurtech.Models;
+using static insurtech.Authorization.Roles.StaticRoleNames;
+using System.Net.Mail;
 
 namespace insurtech.Controllers
 {
@@ -24,17 +31,25 @@ namespace insurtech.Controllers
         private readonly ITenantCache _tenantCache;
         private readonly AbpLoginResultTypeHelper _abpLoginResultTypeHelper;
         private readonly TokenAuthConfiguration _configuration;
+        private readonly UserManager _userManager;
+        private readonly ILogger<TokenAuthController> _logger;
+
 
         public TokenAuthController(
             LogInManager logInManager,
             ITenantCache tenantCache,
             AbpLoginResultTypeHelper abpLoginResultTypeHelper,
-            TokenAuthConfiguration configuration)
+            TokenAuthConfiguration configuration,
+            UserManager userManager,
+            ILogger<TokenAuthController> logger)
+
         {
             _logInManager = logInManager;
             _tenantCache = tenantCache;
             _abpLoginResultTypeHelper = abpLoginResultTypeHelper;
             _configuration = configuration;
+            _userManager = userManager;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -55,6 +70,55 @@ namespace insurtech.Controllers
                 ExpireInSeconds = (int)_configuration.Expiration.TotalSeconds,
                 UserId = loginResult.User.Id
             };
+        }
+
+        [HttpGet]
+        public IActionResult LoginWithGoogle()
+        {
+            var properties = new AuthenticationProperties { RedirectUri = Url.Action("GoogleResponse") };
+            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GoogleResponse()
+        {
+            var authenticateResult = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
+            if (!authenticateResult.Succeeded)
+            {
+                _logger.LogError("Google authentication failed.");
+                return Unauthorized();
+            }
+
+            var emailClaim = authenticateResult.Principal.FindFirst(ClaimTypes.Email);
+            if (emailClaim == null)
+            {
+                _logger.LogError("Google authentication did not return an email.");
+                return Unauthorized();
+            }
+
+            var email = emailClaim.Value;
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                _logger.LogError("you dont haze account");
+            }
+
+            var identity = new ClaimsIdentity(new[]
+            {
+        new Claim(ClaimTypes.Name, user.UserName),
+        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        new Claim(ClaimTypes.Email, user.EmailAddress)
+    }, "Token");
+
+            var accessToken = CreateAccessToken(identity.Claims);
+            return Ok(new AuthenticateResultModel
+            {
+                AccessToken = accessToken,
+                EncryptedAccessToken = GetEncryptedAccessToken(accessToken),
+                ExpireInSeconds = (int)_configuration.Expiration.TotalSeconds,
+                UserId = user.Id
+            });
         }
 
         private string GetTenancyNameOrNull()
