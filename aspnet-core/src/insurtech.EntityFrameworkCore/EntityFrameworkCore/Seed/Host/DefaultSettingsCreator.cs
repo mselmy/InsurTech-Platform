@@ -25,12 +25,20 @@ namespace insurtech.EntityFrameworkCore.Seed.Host
                 tenantId = MultiTenancyConsts.DefaultTenantId;
             }
 
-            // Emailing
-            AddSettingIfNotExists(EmailSettingNames.DefaultFromAddress, "admin@mydomain.com", tenantId);
-            AddSettingIfNotExists(EmailSettingNames.DefaultFromDisplayName, "mydomain.com mailer", tenantId);
+			// Emailing
+			AddSettingIfNotExists(EmailSettingNames.DefaultFromAddress, "myInsureTech@outlook.com", tenantId);
+			AddSettingIfNotExists(EmailSettingNames.DefaultFromDisplayName, "InsureTech.com", tenantId);
+			AddSettingIfNotExists(EmailSettingNames.Smtp.Host, "smtp.office365.com", tenantId);
+			AddSettingIfNotExists(EmailSettingNames.Smtp.Port, "587", tenantId);
+			AddSettingIfNotExists(EmailSettingNames.Smtp.UserName, "myInsureTech@outlook.com");
+			AddSettingIfNotExists(EmailSettingNames.Smtp.Password, "Ash@1234");
+			AddSettingIfNotExists(EmailSettingNames.Smtp.EnableSsl, "true", tenantId); // EnableSsl is true for STARTTLS
+			AddSettingIfNotExists(EmailSettingNames.Smtp.UseDefaultCredentials, "false", tenantId);
 
-            // Languages
-            AddSettingIfNotExists(LocalizationSettingNames.DefaultLanguage, "en", tenantId);
+
+
+			// Languages
+			AddSettingIfNotExists(LocalizationSettingNames.DefaultLanguage, "en", tenantId);
         }
 
         private void AddSettingIfNotExists(string name, string value, int? tenantId = null)

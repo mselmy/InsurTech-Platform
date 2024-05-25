@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
 using Abp.IdentityFramework;
+using Abp.Net.Mail;
 using Castle.Components.DictionaryAdapter.Xml;
 using insurtech.Authorization.Users;
 using insurtech.Companies.Dto;
@@ -20,12 +23,15 @@ namespace insurtech.Companies
     {
 
         private readonly UserManager _userManager;
+        private readonly IEmailSender _emailSender;
 
-        public CompanyAppService(IRepository<Company, long> repository,UserManager userManager) : base(repository)
+        public CompanyAppService(IRepository<Company, long> repository,UserManager userManager, IEmailSender emailSender) : base(repository)
         {
             _userManager = userManager;
+			_emailSender= emailSender;
 
-        }
+
+		}
 
 
 
@@ -41,11 +47,38 @@ namespace insurtech.Companies
 
 
 
-                //await Repository.InsertAsync(company);
+				//await Repository.InsertAsync(company);
+				MailMessage mail = new MailMessage();
 
-                await CurrentUnitOfWork.SaveChangesAsync();
+				mail.From = new MailAddress("myInsureTech@outlook.com");
+                mail.Subject = "welcome";
+                mail.Body = "hello";
+                mail.IsBodyHtml = true;
+                mail.To.Add(new MailAddress(company.EmailAddress));
+            //    await _emailSender.SendAsync(mail);
 
-                return MapToEntityDto(company);
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp-mail.outlook.com",
+                    //smtp.Host = "mohraapp.com";
+                    EnableSsl = true
+                };
+                NetworkCredential NetworkCred = new NetworkCredential();
+                NetworkCred.UserName = "myInsureTech@outlook.com";
+                NetworkCred.Password = "Ash@1234";
+
+                //smtp.UseDefaultCredentials = false;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+
+                await smtp.SendMailAsync(mail);
+
+
+
+				await CurrentUnitOfWork.SaveChangesAsync();
+
+
+				return MapToEntityDto(company);
             }
             catch (Exception ex) {
 
