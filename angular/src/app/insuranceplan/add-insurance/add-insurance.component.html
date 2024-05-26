@@ -1,0 +1,12 @@
+<div>
+    <nav>
+        <ul>
+          <li><a routerLink="homeinsurance">Home Insurance</a></li>
+          <li><a routerLink="healthinsurance">Health Insurance</a></li>
+          <li><a routerLink="motorinsurance">Motor Insurance</a></li>
+        </ul>
+    </nav>
+    <div [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
+        <router-outlet #o="outlet"></router-outlet>
+    </div>
+</div>

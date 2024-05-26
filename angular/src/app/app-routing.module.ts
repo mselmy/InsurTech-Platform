@@ -9,7 +9,10 @@ import { TenantsComponent } from './tenants/tenants.component';
 import { RolesComponent } from 'app/roles/roles.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { RegistrationRequestsComponent } from './registration-requests/registration-requests.component';
-
+import { HomeinsuranceComponent } from './insuranceplan/homeinsurance/homeinsurance.component';
+import { MotorinsuranceComponent } from './insuranceplan/motorinsurance/motorinsurance.component';
+import { HealthinsuranceComponent } from './insuranceplan/healthinsurance/healthinsurance.component';
+import { AddInsuranceComponent } from './insuranceplan/add-insurance/add-insurance.component';
 @NgModule({
     imports: [
         RouterModule.forChild([
@@ -25,7 +28,13 @@ import { RegistrationRequestsComponent } from './registration-requests/registrat
                     { path: 'update-password', component: ChangePasswordComponent, canActivate: [AppRouteGuard] },
                     { path: 'registration-requests', component:RegistrationRequestsComponent, canActivate: [AppRouteGuard] }
                 ]
-            }
+            },
+          
+            {path:'addinsurance',component:AddInsuranceComponent,children:[
+                {path:'homeinsurance',component:HomeinsuranceComponent},
+                {path:'motorinsurance',component:MotorinsuranceComponent},
+                {path:'healthinsurance',component:HealthinsuranceComponent},
+            ]}  
         ])
     ],
     exports: [RouterModule]
