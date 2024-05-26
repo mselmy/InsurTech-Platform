@@ -91,7 +91,9 @@ import { DataTablesModule } from 'angular-datatables';
         SharedModule,
         NgxPaginationModule,
         DataTablesModule,
-        ButtonModule,
+        ButtonModule
+        
+        
     ],
     providers: []
 })

@@ -1,4 +1,5 @@
 <div [@routerTransition]>
+    <h6 class="d-none">{{companies[0].id}}</h6>
     <section class="content-header">
         <div class="container-fluid">
             <div class="row">
@@ -19,7 +20,7 @@
                         <div class="info-box-content">
                             <span class="info-box-text">New Requests</span>
                             <span class="info-box-number">
-                                6,350
+                                {{newRequestCount}}
                             </span>
                         </div>
                     </div>
@@ -32,7 +33,7 @@
                         <div class="info-box-content">
                             <span class="info-box-text">Approved</span>
                             <span class="info-box-number">
-                                170
+                                {{approvedCount}}
                             </span>
                         </div>
                     </div>
@@ -46,7 +47,7 @@
                         <div class="info-box-content">
                             <span class="info-box-text">Rejected</span>
                             <span class="info-box-number">
-                                200
+                                {{rejectedCount}}
                             </span>
                         </div>
                     </div>
@@ -72,66 +73,41 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>5452</td>
-                                        <td>Name 1</td>
-                                        <td>1234567890</td>
-                                        <td>1234567890</td>
-                                        <td>Location 1</td>
-                                        <td>
-                                            <span class="badge badge-warning mx-1">
-                                                Pending
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-outline-success mr-2" (click)="showApproveAlert()">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                            <a class="btn btn-outline-danger ml-2" (click)="showDeclineAlert()">
-                                                <i class="fas fa-times"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5453</td>
-                                        <td>Name 2</td>
-                                        <td>1234567890</td>
-                                        <td>1234567890</td>
-                                        <td>Location 2</td>
-                                        <td>
-                                            <span class="badge badge-warning mx-1">
-                                                Pending
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-outline-success mr-2" (click)="showApproveAlert()">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                            <a class="btn btn-outline-danger ml-2" (click)="showDeclineAlert()">
-                                                <i class="fas fa-times"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5454</td>
-                                        <td>Name 3</td>
-                                        <td>1234567890</td>
-                                        <td>1234567890</td>
-                                        <td>Location 3</td>
-                                        <td>
-                                            <span class="badge badge-warning mx-1">
-                                                Pending
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-outline-success mr-2" (click)="showApproveAlert()">
-                                                <i class="fas fa-check"></i>
-                                            </a>
-                                            <a class="btn btn-outline-danger ml-2" (click)="showDeclineAlert()">
-                                                <i class="fas fa-times"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    @for (request of companies; track $index) 
+                                    {
+                                        @if (request.status == 2) 
+                                        {
+                                            <tr>
+                                                <td>{{ request.id }}</td>
+                                                <td>{{ request.name }}</td>
+                                                <td>{{ request.taxNumber }}</td>
+                                                @if(request.phoneNumber == null)
+                                                {
+                                                    <td>
+                                                        <span class="badge badge-danger mx-1">
+                                                            No Phone Number
+                                                        </span>
+                                                    </td>
+                                                }@else {
+                                                    <td>{{ request.phoneNumber }}</td>
+                                                }
+                                                <td>{{ request.location }}</td>
+                                                <td>
+                                                    <span class="badge badge-warning mx-1">
+                                                        Pending
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-outline-success mr-2" (click)="showApproveAlert(request.id)">
+                                                        <i class="fas fa-check"></i>
+                                                    </a>
+                                                    <a class="btn btn-outline-danger ml-2" (click)="showDeclineAlert(request.id)">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -158,57 +134,47 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>5462</td>
-                                        <td>Name 1</td>
-                                        <td>1234567890</td>
-                                        <td>1234567890</td>
-                                        <td>Location 1</td>
-                                        <td>
-                                            <span class="badge badge-success mx-1">
-                                                Approved
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-outline-info">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5463</td>
-                                        <td>Name 1</td>
-                                        <td>1234567890</td>
-                                        <td>1234567890</td>
-                                        <td>Location 1</td>
-                                        <td>
-                                            <span class="badge badge-danger mx-1">
-                                                Rejected
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-outline-info">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5452</td>
-                                        <td>Name 1</td>
-                                        <td>1234567890</td>
-                                        <td>1234567890</td>
-                                        <td>Location 1</td>
-                                        <td>
-                                            <span class="badge badge-success mx-1">
-                                                Approved
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-outline-info">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    @for (request of companies; track $index)
+                                    {
+                                        @if (request.status != 2)
+                                        {
+                                            <tr>
+                                                <td>{{ request.id }}</td>
+                                                <td>{{ request.name }}</td>
+                                                <td>{{ request.taxNumber }}</td>
+                                                @if(request.phoneNumber == null)
+                                                {
+                                                <td>
+                                                    <span class="badge badge-dark mx-1">
+                                                        No Phone Number
+                                                    </span>
+                                                </td>
+                                                }@else {
+                                                <td>{{ request.phoneNumber }}</td>
+                                                }
+                                                <td>{{ request.location }}</td>
+                                                <td>
+                                                    @if (request.status == 1)
+                                                    {
+                                                        <span class="badge badge-success mx-1">
+                                                            Approved
+                                                        </span>
+                                                    }
+                                                    @else
+                                                    {
+                                                        <span class="badge badge-danger mx-1">
+                                                            Rejected
+                                                        </span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-outline-info" (click)="showSwitchAlert(request.id)">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
                                 </tbody>
                             </table>
                         </div>
