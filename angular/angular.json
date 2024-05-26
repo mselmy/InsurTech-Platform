@@ -32,6 +32,7 @@
             ],
             "styles": [
               "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "src/assets/freeze-ui/freeze-ui.css",
@@ -39,10 +40,20 @@
               "node_modules/admin-lte-css-only/css/adminlte.min.css",
               "src/shared/core.less",
               "node_modules/datatables.net-dt/css/dataTables.dataTables.min.css",
-              "node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css"
+              "node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css",
+              "src/account/register/vendor/animate/animate.css",
+              "src/account/register/fonts/font-awesome-4.7.0/css/font-awesome.min.css",
+              "src/account/register/fonts/iconic/css/material-design-iconic-font.css",
+              "src/account/register/vendor/animate/animate.css",
+              "src/account/register/vendor/css-hamburgers/hamburgers.min.css",
+              "src/account/register/vendor/animsition/css/animsition.min.css",
+              "src/account/register/vendor/select2/select2.min.css",
+              "src/account/register/vendor/daterangepicker/daterangepicker.css",
+              "src/assets/css/util.css"
             ],
             "scripts": [
               "node_modules/moment/min/moment.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/@aspnet/signalr/dist/browser/signalr.min.js",
               "node_modules/sweetalert2/dist/sweetalert2.js",
               "src/assets/freeze-ui/freeze-ui.js",
@@ -53,7 +64,16 @@
               "node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/datatables.net/js/dataTables.min.js",
-              "node_modules/datatables.net-responsive/js/dataTables.responsive.js"
+              "node_modules/datatables.net-responsive/js/dataTables.responsive.js",
+              "src/account/register/vendor/jquery/jquery-3.2.1.min.js",
+              "src/account/register/vendor/animsition/js/animsition.min.js",
+              "src/account/register/vendor/bootstrap/js/popper.js",
+              "src/account/register/vendor/bootstrap/js/bootstrap.min.js",
+              "src/account/register/vendor/select2/select2.min.js",
+              "src/account/register/vendor/daterangepicker/moment.min.js",
+              "src/account/register/vendor/daterangepicker/daterangepicker.js",
+              "src/account/register/vendor/countdowntime/countdowntime.js",
+              "src/assets/js/main.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -148,7 +168,16 @@
               "src/assets/freeze-ui/freeze-ui.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/admin-lte-css-only/css/adminlte.min.css",
-              "src/shared/core.less"
+              "src/shared/core.less",
+              "src/account/register/vendor/animate/animate.css",
+              "src/account/register/vendor/font-awesome-4.7.0/css/font-awesome.min.css",
+
+              "src/account/register/vendor/animate/animate.css",
+              "src/account/register/vendor/css-hamburgers/hamburgers.min.css",
+              "src/account/register/vendor/animsition/css/animsition.min.css",
+              "src/account/register/vendor/select2/select2.min.css",
+              "src/account/register/vendor/daterangepicker/daterangepicker.css",
+              "src/assets/css/util.css"
             ],
             "scripts": [
               "node_modules/moment/min/moment.min.js",
@@ -188,5 +217,8 @@
     "@schematics/angular:directive": {
       "prefix": "app"
     }
+  },
+  "cli": {
+    "analytics": "61ba9a36-e2fd-48b7-8202-d1f74c1cb9d5"
   }
 }
