@@ -6,6 +6,7 @@ using insurtech.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace insurtech.Customers.DTO
         public string Name { get; set; }
         [Required]
         [StringLength(AbpUserBase.MaxNameLength)]
+        [RegularExpression(@"^[a-zA-Z][a-zA-Z0-9]*$", ErrorMessage = "Invalid UserName")]
 
         public string UserName { get; set; }
         [Required]
@@ -37,5 +39,10 @@ namespace insurtech.Customers.DTO
         [Required]
         [DisableAuditing]
         public DateTime DateOfBirth { get; set; }
+        [Required]
+        [DisableAuditing]
+        [RegexStringValidator(@"^01(0|1|2|5)[0-9]{8}$")]
+
+        public string phoneNumber { get; set; }
     }
 }
