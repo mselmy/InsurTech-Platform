@@ -12,12 +12,28 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\insurtech.Core\insurtech.Core.csproj" />
+    <Compile Remove="HomeInsurancePlan\HomeInsurancePlanDTO\**" />
+    <Compile Remove="MotorInsurancePlan\MotorInsurancePlanDTO\**" />
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="HomeInsurancePlan\HomeInsurancePlanDTO\**" />
+    <EmbeddedResource Remove="MotorInsurancePlan\MotorInsurancePlanDTO\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="HomeInsurancePlan\HomeInsurancePlanDTO\**" />
+    <None Remove="MotorInsurancePlan\MotorInsurancePlanDTO\**" />
+    <None Remove="NewFolder\**" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="HomeInsurancePlan\HomeInsurancePlanDTO\" />
+    <ProjectReference Include="..\insurtech.Core\insurtech.Core.csproj" />
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\insurtech.Core\insurtech.Core.csproj" />
+    <ProjectReference Include="..\insurtech.EntityFrameworkCore\insurtech.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="MotorInsurancePlan\MotorInsurancePlanDTO\" />
-    <Folder Include="NewFolder\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Abp.MailKit" Version="9.2.2" />

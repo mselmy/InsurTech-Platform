@@ -13,7 +13,7 @@ namespace insurtech.Models
         //public long NotificationId { get; set; }
         public string Body { get; set; }
         public long UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
         
     }
 }
