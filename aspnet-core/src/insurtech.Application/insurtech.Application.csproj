@@ -35,4 +35,7 @@
   <ItemGroup>
     <Folder Include="MotorInsurancePlan\MotorInsurancePlanDTO\" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Abp.MailKit" Version="9.2.2" />
+  </ItemGroup>
 </Project>

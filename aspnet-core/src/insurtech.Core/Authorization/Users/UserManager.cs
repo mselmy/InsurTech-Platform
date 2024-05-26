@@ -12,6 +12,7 @@ using Abp.Organizations;
 using Abp.Runtime.Caching;
 using insurtech.Authorization.Roles;
 using Abp.Authorization.Roles;
+using System.Threading.Tasks;
 
 namespace insurtech.Authorization.Users
 {
@@ -56,6 +57,12 @@ namespace insurtech.Authorization.Users
               settingManager,
               userLoginRepository)
         {
+
+        }
+
+        public override Task<IdentityResult> CreateAsync(User user)
+        {
+            return base.CreateAsync(user);
         }
     }
 }
