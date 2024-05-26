@@ -1,0 +1,79 @@
+<p>healthinsurance works!</p>
+<section class="p-4 rounded my-3 w-50 mx-auto">
+    <form  [formGroup]="Edithomeform" (ngSubmit)="EditHealth()">
+        <div class="mb-2">
+            <label for="YearlyCoverage">Yearly Coverage</label>
+            <input formControlName="YearlyCoverage" min="0" id="YearlyCoverage" type="number" class="form-control">
+            <div *ngIf="Edithomeform.get('YearlyCoverage')?.errors&& Edithomeform.get('YearlyCoverage')?.touched">
+                <span style="color: red;" *ngIf="Edithomeform.get('YearlyCoverage')?.getError('required')">Yearly Coverage is required</span>
+                <span style="color: red;" *ngIf="Edithomeform.get('YearlyCoverage')?.getError('min')">Minimun Value is Zero</span>
+                <span style="color: red;" *ngIf="Edithomeform.get('YearlyCoverage')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label>Insurance Level</label>
+            <select formControlName="InsuranceLevel" class="form-control">
+                <option value="0">Basic</option>
+                <option value="1">Standard</option>
+                <option value="2">Premium</option>
+            </select>
+            <div *ngIf="Edithomeform.get('InsuranceLevel')?.errors&& Edithomeform.get('InsuranceLevel')?.touched">
+                <span style="color: red;" *ngIf="Edithomeform.get('InsuranceLevel')?.getError('required')">Insurance Level</span>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label>Quotation</label>
+            <input formControlName="Quotation" min="0" type="number" class="form-control">
+            <div *ngIf="Edithomeform.get('Quotation')?.errors&& Edithomeform.get('Quotation')?.touched">
+                <span style="color: red;" *ngIf="Edithomeform.get('Quotation')?.getError('required')">Quotation is required</span>
+                <span style="color: red;" *ngIf="Edithomeform.get('Quotation')?.getError('min')">Minimun Value is Zero</span>
+                <span style="color: red;" *ngIf="Edithomeform.get('Quotation')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label>Water Damage</label>
+            <input formControlName="WaterDamage" min="0" type="text" class="form-control">
+            <div *ngIf="Edithomeform.get('WaterDamage')?.errors&& Edithomeform.get('WaterDamage')?.touched">
+                <span style="color: red;" *ngIf="Edithomeform.get('WaterDamage')?.getError('required')">Water Damage is required</span>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label>FiresAndExplosion</label>
+            <input formControlName="FiresAndExplosion" min="0" type="number" class="form-control">
+            <div *ngIf="Edithomeform.get('FiresAndExplosion')?.errors&& Edithomeform.get('ClinicsCoverage')?.touched">
+                <span style="color: red;" *ngIf="Edithomeform.get('FiresAndExplosion')?.getError('required')">FiresAndExplosion is required</span>
+                <span style="color: red;" *ngIf="Edithomeform.get('FiresAndExplosion')?.getError('min')">Minimun Value is Zero</span>
+                <span style="color: red;" *ngIf="Edithomeform.get('FiresAndExplosion')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label>Glass Breakage</label>
+            <input formControlName="GlassBreakage" min="0" type="number" class="form-control">
+            <div *ngIf="Edithomeform.get('GlassBreakage')?.errors&& Edithomeform.get('GlassBreakage')?.touched">
+                <span style="color: red;" *ngIf="Edithomeform.get('GlassBreakage')?.getError('required')">GlassBreakagend Surgery is required</span>
+                <span style="color: red;" *ngIf="Edithomeform.get('GlassBreakage')?.getError('min')">Minimun Value is Zero</span>
+                <span style="color: red;" *ngIf="Edithomeform.get('GlassBreakage')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label>NaturalHazard</label>
+            <input formControlName="NaturalHazard" min="0" type="number" class="form-control">
+            <div *ngIf="Edithomeform.get('NaturalHazard')?.errors&& Edithomeform.get('NaturalHazard')?.touched">
+                <span style="color: red;" *ngIf="Edithomeform.get('NaturalHazard')?.getError('required')">NaturalHazard is required</span>
+                <span style="color: red;" *ngIf="Edithomeform.get('NaturalHazard')?.getError('min')">Minimun Value is Zero</span>
+                <span style="color: red;" *ngIf="Edithomeform.get('NaturalHazard')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label>AttemptedTheft</label>
+            <input formControlName="AttemptedTheft" min="0" type="number" class="form-control">
+            <div *ngIf="Edithomeform.get('AttemptedTheft')?.errors&& Edithomeform.get('AttemptedTheft')?.touched">
+                <span style="color: red;" *ngIf="Edithomeform.get('AttemptedTheft')?.getError('required')">Dental Coverage is required</span>
+                <span style="color: red;" *ngIf="Edithomeform.get('AttemptedTheft')?.getError('min')">Minimun Value is Zero</span>
+                <span style="color: red;" *ngIf="Edithomeform.get('AttemptedTheft')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+            </div>
+        </div>
+        <button [disabled]="Edithomeform.invalid" type="submit" class="btn btn-success d-block ms-auto">Edit</button>
+    </form>
+</section>
+
