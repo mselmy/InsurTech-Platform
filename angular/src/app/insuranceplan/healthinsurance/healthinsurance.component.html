@@ -1,6 +1,6 @@
-<p>healthinsurance works!</p>
+
 <section class="p-4 rounded my-3 w-50 mx-auto">
-    <form  [formGroup]="addhealthform" (ngSubmit)="addhealth()">
+    <form class="form-border" [formGroup]="addhealthform" (ngSubmit)="addhealth()">
         <div class="mb-2">
             <label for="YearlyCoverage">Yearly Coverage</label>
             <input formControlName="YearlyCoverage" min="0" id="YearlyCoverage" type="number" class="form-control">
@@ -73,6 +73,6 @@
                 <span style="color: red;" *ngIf="addhealthform.get('DentalCoverage')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
             </div>
         </div>
-        <button [disabled]="addhealthform.invalid" type="submit" class="btn btn-success d-block ms-auto">Add</button>
+        <button [disabled]="addhealthform.invalid" type="submit" style="background-color: #011511 ; color:white ;font: bold;" class=" btn  d-block ms-auto w-25">Add</button>
     </form>
 </section>

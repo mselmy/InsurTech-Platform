@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import{ MotorinsuranceService } from '../../services/motorinsurance.service'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MotorinsuranceModule } from '@app/models/motorinsurance/motorinsurance.module';
+import { AppAuthService } from '@shared/auth/app-auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { AppSessionService } from '@shared/session/app-session.service';
 
 @Component({
   selector: 'app-motorinsurance',
@@ -23,7 +26,13 @@ export class MotorinsuranceComponent {
     LegalExpenses: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(1.7976931348623157e+308)]),
     
   })
-  constructor(public motorservce:MotorinsuranceService){}
+  constructor(public motorservce:MotorinsuranceService,public auth :AppAuthService,public route : ActivatedRoute,public  appSessionService: AppSessionService){}
+  userId: number;
+  ngOnInit(): void {
+    // Accessing the user ID from the AppSessionService
+    this.userId = this.appSessionService.userId;
+    console.log('User ID:', this.userId); // This will log the user ID to the console
+  }
   addmotor(){
     if(this.addmotorform.valid){
       const formValue = this.addmotorform.value;
@@ -31,7 +40,7 @@ export class MotorinsuranceComponent {
         formValue.YearlyCoverage,
         formValue.InsuranceLevel,
         formValue.Quotation,
-        2,
+        this.userId,
         formValue.PersonalAccident,
         formValue.Theft,
         formValue.ThirdPartyLiability,

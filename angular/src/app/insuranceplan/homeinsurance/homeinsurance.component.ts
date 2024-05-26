@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import { HomeinsuranceService } from '../../services/homeinsurance.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HomeinsuranceModule } from '../../models/homeinsurance/homeinsurance.module'; // Corrected import path
+import { ActivatedRoute } from '@angular/router';
+import { AppAuthService } from '@shared/auth/app-auth.service';
+import { AppSessionService } from '@shared/session/app-session.service';
 
 @Component({
   selector: 'app-homeinsurance',
@@ -22,9 +25,13 @@ export class HomeinsuranceComponent {
     AttemptedTheft: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(1.7976931348623157e+308)]),
     FiresAndExplosion: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(1.7976931348623157e+308)])
   });
-
-  constructor(public homeinsuranceService: HomeinsuranceService) {}
-
+  userId: number;
+  constructor(public homeinsuranceService: HomeinsuranceService,public auth :AppAuthService,public route : ActivatedRoute,public  appSessionService: AppSessionService) {}
+  ngOnInit(): void {
+    // Accessing the user ID from the AppSessionService
+    this.userId = this.appSessionService.userId;
+    console.log('User ID:', this.userId); // This will log the user ID to the console
+  }
   addhome() {
     if (this.addhomeinsurance.valid) {
       const formValue = this.addhomeinsurance.value;
@@ -32,7 +39,7 @@ export class HomeinsuranceComponent {
         formValue.YearlyCoverage,
         formValue.InsuranceLevel,
         formValue.Quotation,
-        2, // Assuming CompanyId is fixed or obtained elsewhere
+        this.userId, // Assuming CompanyId is fixed or obtained elsewhere
         formValue.WaterDamage,
         formValue.GlassBreakage,
         formValue.NaturalHazard,

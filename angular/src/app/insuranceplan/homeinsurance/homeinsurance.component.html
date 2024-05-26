@@ -1,4 +1,3 @@
-<p>homeinsurance works!</p>
 
 <section class="p-4 rounded my-3 w-50 mx-auto">
     <form class="form-border"  [formGroup]="addhomeinsurance" (ngSubmit)="addhome()">
@@ -76,6 +75,6 @@
                 <span style="color: red;" *ngIf="addhomeinsurance.get('FiresAndExplosion')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
             </div>
         </div>
-        <button [disabled]="addhomeinsurance.invalid" type="submit" class="btn btn-success d-block ms-auto">Add</button>
+        <button [disabled]="addhomeinsurance.invalid" type="submit" style="background-color: #011511 ; color:white ;font: bold;" class="btn btn-success d-block ms-auto w-25">Add</button>
     </form>
 </section>

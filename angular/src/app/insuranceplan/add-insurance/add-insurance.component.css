@@ -1,11 +1,46 @@
 nav ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  nav ul li {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    margin-right: 10px;
-  }
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Centering the navigation container */
+nav {
+  text-align: center;
+}
+
+/* Styling the list to display inline items with no default list styling */
+.nav-list {
+  list-style: none; /* Remove default list styling */
+  padding: 0;
+  margin: 0;
+  display: inline-block; /* Ensure the ul itself is inline-block for centering */
+}
+
+/* Making the list items inline-block with spacing */
+.nav-list li {
+  display: inline-block; /* Display list items inline-block */
+  margin: 0 15px; /* Add space between items */
+}
+
+/* Styling the links */
+.nav-list a {
+  text-decoration: none;
+  color: #042521; /* Set the font color to #042521 */
+  text-decoration-color: #2acaac; /* Set the underline color to #2acaac */
+  text-underline-offset: 4px; /* Adjust the space between text and underline */
+}
+
+/* Add underline on hover with the specified color */
+.nav-list a:hover {
+  text-decoration: underline;
+  text-decoration-color: #2acaac; /* Set the underline color on hover to #2acaac */
+  text-underline-offset: 10px; /* Adjust the space between text and underline on hover */
+}
+
+/* Active link style */
+.nav-list a.active {
+  color: #2acaac; /* Change the active link color */
+  text-decoration: underline; /* Ensure it's underlined */
+  text-decoration-color: #2acaac; /* Ensure the underline color matches */
+  text-underline-offset: 10px; /* Adjust the space between text and underline */
+}

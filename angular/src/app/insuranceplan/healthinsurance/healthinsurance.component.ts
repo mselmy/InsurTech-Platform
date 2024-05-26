@@ -1,8 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, numberAttribute } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HealthinsuranceService } from '../../services/healthinsurance.service';
 import { HealthinsuranceModule } from '../../models/healthinsurance/healthinsurance.module';
+import{AppAuthService} from '../../../shared/auth/app-auth.service'
+import { ActivatedRoute } from '@angular/router';
+import { AppSessionService } from '@shared/session/app-session.service';
 
 @Component({
   selector: 'app-healthinsurance',
@@ -22,9 +25,25 @@ export class HealthinsuranceComponent {
     OpticalCoverage: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(1.7976931348623157e+308)]),
     DentalCoverage: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(1.7976931348623157e+308)])
   });
+  userId: number;
+  constructor(public healthService: HealthinsuranceService , public auth :AppAuthService,public route : ActivatedRoute,public  appSessionService: AppSessionService) {}
+ 
+  
+  
 
-  constructor(public healthService: HealthinsuranceService) {}
 
+  
+
+
+
+  ngOnInit(): void {
+    // Accessing the user ID from the AppSessionService
+    this.userId = this.appSessionService.userId;
+    console.log('User ID:', this.userId); // This will log the user ID to the console
+  }
+
+  
+  
   addhealth() {
     if (this.addhealthform.valid) {
       const formValue = this.addhealthform.value;
@@ -32,7 +51,7 @@ export class HealthinsuranceComponent {
         formValue.YearlyCoverage,
         formValue.InsuranceLevel,
         formValue.Quotation,
-        2, // Assuming CompanyId is fixed or obtained elsewhere
+        this.userId, // Assuming CompanyId is fixed or obtained elsewhere
         formValue.MedicalNetwork,
         formValue.ClinicsCoverage,
         formValue.HospitalizationAndSurgery,
