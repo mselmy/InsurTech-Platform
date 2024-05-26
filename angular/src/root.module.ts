@@ -1,7 +1,7 @@
 import { NgModule, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -55,6 +55,7 @@ export function getCurrentLanguage(): string {
       provide: LOCALE_ID,
       useFactory: getCurrentLanguage,
     },
+    provideHttpClient(),
   ],
   bootstrap: [RootComponent],
 })

@@ -4,6 +4,9 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { Config } from 'datatables.net-dt';
 import 'datatables.net-responsive';
 import Swal from 'sweetalert2';
+import { RegistrationRequestsServiceService } from '../services/registration-requests-service.service';
+import { Company } from '../../shared/Model/company';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-registration-requests',
@@ -14,9 +17,29 @@ import Swal from 'sweetalert2';
 })
 export class RegistrationRequestsComponent implements OnInit
 {
-dtOptions: Config = {};
-constructor(private router: Router) { }
+
+  dtOptions: Config = {};
+  companies: Company[] = [];
+  newRequestCount: number = 0;
+  approvedCount: number = 0;
+  rejectedCount: number = 0;
+  
+
+constructor(private router: Router, private service : RegistrationRequestsServiceService) { }
   ngOnInit(): void {
+
+    this.service.GetAll().subscribe((data:any) => {
+      this.companies = data.result.items;
+      this.newRequestCount = this.companies.filter(x => x.status === 2).length;
+      this.approvedCount = this.companies.filter(x => x.status === 1).length;
+      this.rejectedCount = this.companies.filter(x => x.status === 0).length;
+      });
+
+
+    
+
+    
+
     this.dtOptions = {
       columnDefs: [
         { orderable: false, targets: -1 }, // Disables sorting on the last column
@@ -25,9 +48,28 @@ constructor(private router: Router) { }
       ],
       responsive: true
     };
+
   }
 
-  showApproveAlert() {
+  AcceptRequest(id: number){
+    this.service.ApproveRequest(id).subscribe((data:any) => {});
+  }
+
+  RejectRequest(id: number){
+    this.service.RejectRequest(id).subscribe((data:any) => {});
+  }
+
+  SwitchRequestStatus(id: number){
+    this.service.GetById(id).subscribe((data:any) => {
+      if(data.result.status === 1){
+        this.RejectRequest(id);
+      } else {
+        this.AcceptRequest(id);
+      }
+    });
+  }
+
+  showApproveAlert(id:number) {
     Swal.fire({
       title: "Approve Request",
       text: "Are you sure you want to approve this request?",
@@ -38,6 +80,7 @@ constructor(private router: Router) { }
       confirmButtonText: "Yes"
     }).then((result) => {
       if (result.isConfirmed) {
+        this.AcceptRequest(id);
         Swal.fire({
           title: "Approved!",
           text: "The request has been approved.",
@@ -45,9 +88,13 @@ constructor(private router: Router) { }
         });
       }
     });
+    // refresh the company list
+    this.service.GetAll().subscribe((data:any) => {
+      this.companies = data.result.items;
+    });
   }
 
-  showDeclineAlert() {
+  showDeclineAlert(id:number) {
     Swal.fire({
       title: "Decline Request",
       text: "Are you sure you want to decline this request?",
@@ -58,6 +105,7 @@ constructor(private router: Router) { }
       confirmButtonText: "Yes"
     }).then((result) => {
       if (result.isConfirmed) {
+        this.RejectRequest(id);
         Swal.fire({
           title: "Declined!",
           text: "The request has been declined.",
@@ -65,8 +113,35 @@ constructor(private router: Router) { }
         });
       }
     });
-    // route to details
-    this.router.navigate(['/app/registration-requests/details']);
+    // refresh the company list
+    this.service.GetAll().subscribe((data:any) => {
+      this.companies = data.result.items;
+    });
+  }
+
+  showSwitchAlert(id:number) {
+    Swal.fire({
+      title: "Switch Request Status",
+      text: "Are you sure you want to switch the status of this request?",
+      icon: "info",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.SwitchRequestStatus(id);
+        Swal.fire({
+          title: "Status Switched!",
+          text: "The request status has been switched.",
+          icon: "success"
+        });
+      }
+    });
+    // refresh the company list
+    this.service.GetAll().subscribe((data:any) => {
+      this.companies = data.result.items;
+    });
   }
 
 }
