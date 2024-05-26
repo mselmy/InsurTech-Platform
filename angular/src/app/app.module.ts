@@ -44,6 +44,9 @@ import { ButtonModule } from 'primeng/button';
 import { DataTablesModule } from 'angular-datatables';
 
 
+//addinsurance
+
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -74,7 +77,11 @@ import { DataTablesModule } from 'angular-datatables';
         SidebarComponent,
         SidebarLogoComponent,
         SidebarUserPanelComponent,
-        SidebarMenuComponent
+        SidebarMenuComponent,
+        //addinsurance
+        
+
+
     ],
     imports: [
         CommonModule,

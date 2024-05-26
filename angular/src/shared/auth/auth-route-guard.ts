@@ -36,6 +36,7 @@ export class AppRouteGuard  {
     }
 
     selectBestRoute(): string {
+       
         if (!this._sessionService.user) {
             return '/account/login';
         }

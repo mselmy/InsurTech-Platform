@@ -15,6 +15,7 @@ export class AppAuthService {
     authenticateModel: AuthenticateModel;
     authenticateResult: AuthenticateResultModel;
     rememberMe: boolean;
+    a:string;
 
     constructor(
         private _tokenAuthService: TokenAuthServiceProxy,
@@ -54,7 +55,7 @@ export class AppAuthService {
         authenticateResult: AuthenticateResultModel
     ) {
         this.authenticateResult = authenticateResult;
-
+        
         if (authenticateResult.accessToken) {
             // Successfully logged in
             this.login(
@@ -82,7 +83,8 @@ export class AppAuthService {
             : undefined;
 
         this._tokenService.setToken(accessToken, tokenExpireDate);
-
+        this.a=accessToken;
+        console.log(accessToken);
         this._utilsService.setCookieValue(
             AppConsts.authorization.encryptedAuthTokenName,
             encryptedAccessToken,
@@ -104,4 +106,5 @@ export class AppAuthService {
         this.authenticateResult = null;
         this.rememberMe = false;
     }
+    
 }
