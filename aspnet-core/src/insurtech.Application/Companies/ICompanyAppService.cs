@@ -9,7 +9,7 @@ using Abp.Application.Services.Dto;
 
 namespace insurtech.Companies
 {
-    public interface ICompanyAppService : IAsyncCrudAppService<CompanyDto, long, PagedAndSortedResultRequestDto, CreateCompanyInput, CompanyDto>
+    public interface ICompanyAppService : IAsyncCrudAppService<CompanyDto, long, PagedCompanyResultRequestDto, CreateCompanyInput, CompanyDto>
     {
          Task Accept(EntityDto<long> company);  
          Task Reject (EntityDto<long> company);
