@@ -11,6 +11,7 @@ namespace insurtech.Companies
 {
     public interface ICompanyAppService : IAsyncCrudAppService<CompanyDto, long, PagedAndSortedResultRequestDto, CreateCompanyInput, CompanyDto>
     {
-
+         Task Accept(EntityDto<long> company);  
+         Task Reject (EntityDto<long> company);
     }
 }
