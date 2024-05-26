@@ -13,6 +13,13 @@ import { HomeinsuranceComponent } from './insuranceplan/homeinsurance/homeinsura
 import { MotorinsuranceComponent } from './insuranceplan/motorinsurance/motorinsurance.component';
 import { HealthinsuranceComponent } from './insuranceplan/healthinsurance/healthinsurance.component';
 import { AddInsuranceComponent } from './insuranceplan/add-insurance/add-insurance.component';
+import{EditHomeInsurancePlanComponent}  from './insuranceplan/Edit/Home/edit-home-insurance-plan.component';
+import {EditHealthInsurancePlanComponent } from './insuranceplan/Edit/Health/edit-health-insurance-plan.component';
+import { EditMotorInsurancePlanComponent } from './insuranceplan/Edit/Motor/edit-motor-insurance-plan.component';
+
+
+
+
 @NgModule({
     imports: [
         RouterModule.forChild([
@@ -34,7 +41,12 @@ import { AddInsuranceComponent } from './insuranceplan/add-insurance/add-insuran
                 {path:'homeinsurance',component:HomeinsuranceComponent},
                 {path:'motorinsurance',component:MotorinsuranceComponent},
                 {path:'healthinsurance',component:HealthinsuranceComponent},
-            ]}  
+            ]},
+           
+                {path:'homeinsurance/:id',component:EditHomeInsurancePlanComponent},
+                {path:'motorinsurance/:id',component:EditMotorInsurancePlanComponent},
+                {path:'healthinsurance/:id',component:EditHealthInsurancePlanComponent},
+            
         ])
     ],
     exports: [RouterModule]
