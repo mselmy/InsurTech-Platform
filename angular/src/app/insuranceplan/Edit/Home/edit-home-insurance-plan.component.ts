@@ -37,7 +37,7 @@ export class EditHomeInsurancePlanComponent implements OnInit, OnDestroy {
       
           },
           error: (error) => {
-            console.error('Error fetching health insurance', error);
+            console.error('Error fetching home insurance', error);
           }
         }
       );
@@ -96,10 +96,10 @@ export class EditHomeInsurancePlanComponent implements OnInit, OnDestroy {
       this.homeservices.Edit(healthObj).subscribe(
         {
           next:(data) => {
-            console.log('Health insurance updated successfully', data);
+            console.log('home insurance updated successfully', data);
           },
           error:(error) => {
-            console.error('Error updating health insurance', error);
+            console.error('Error updating home insurance', error);
           }
         }       
       );

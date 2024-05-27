@@ -1,6 +1,17 @@
 export class MotorinsuranceModule {
-
-  constructor(public YearlyCoverage:number,public Level:number,public Quotation:number,public CompanyId:number,public PersonalAccident:number,public Theft:number,public ThirdPartyLiability:number,public OwnDamage:number ,public LegalExpenses:number){
-
-  }
+  constructor(
+    public yearlyCoverage: number,
+    public level: number,
+    public categoryName:string,
+    public quotation: number,
+    public companyName: string,
+    public personalAccident: number,
+    public theft: number,
+    public thirdPartyLiability: number,
+    public ownDamage: number,
+    public legalExpenses: number,
+    public requestNumber: number,
+    public id: number
+  ) {}
+  
  }

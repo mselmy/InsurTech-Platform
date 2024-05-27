@@ -12,13 +12,13 @@ import { EditHomeinsuranceModule } from '@app/models/homeinsurance/Edithomeinsur
   providedIn: 'root'
 })
 export class HomeinsuranceService {
-private baseurl:string="https://localhost:44311/api/services/app/HomeInsurancePlanService/Create";
+private baseurl:string="https://localhost:44311/api/services/app/HomeInsurancePlanService/";
   constructor(public httpclinte :HttpClient ) {
 
    }
    //create
    add(homeinsurance: HomeinsuranceModule): Observable<any> {
-    return this.httpclinte.post<any>(this.baseurl, homeinsurance);
+    return this.httpclinte.post<any>(`${this.baseurl}Create`, homeinsurance);
   }
   Edit(homeinsurance: EditHomeinsuranceModule):Observable<any>{
   
