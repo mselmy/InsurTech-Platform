@@ -1,0 +1,79 @@
+<section class="p-4 rounded my-3 w-50 mx-auto ">
+    <form class="form-border"  [formGroup]="addmotorform"  (ngSubmit)="addmotor()">
+        <div class="mb-2">
+            <label for="YearlyCoverage">Yearly Coverage</label>
+            <input  formControlName="YearlyCoverage" min="0" id="YearlyCoverage" type="number" class="form-control">
+            <div *ngIf="addmotorform.get('YearlyCoverage')?.errors&& addmotorform.get('YearlyCoverage')?.touched">
+                <span style="color: red;" *ngIf="addmotorform.get('YearlyCoverage')?.getError('required')">Yearly Coverage is required</span>
+                <span style="color: red;" *ngIf="addmotorform.get('YearlyCoverage')?.getError('min')">Minimun Value is Zero</span>
+                <span style="color: red;" *ngIf="addmotorform.get('YearlyCoverage')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label>Insurance Level</label>
+            <select formControlName="InsuranceLevel" class="form-control">
+                <option value="0">Basic</option>
+                <option value="1">Standard</option>
+                <option value="2">Premium</option>
+            </select>
+            <div *ngIf="addmotorform.get('InsuranceLevel')?.errors&& addmotorform.get('InsuranceLevel')?.touched">
+                <span style="color: red;" *ngIf="addmotorform.get('InsuranceLevel')?.getError('required')">Insurance Level</span>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label>Quotation</label>
+            <input formControlName="Quotation" min="0" type="number" class="form-control">
+            <div *ngIf="addmotorform.get('Quotation')?.errors&& addmotorform.get('Quotation')?.touched">
+                <span style="color: red;" *ngIf="addmotorform.get('Quotation')?.getError('required')">Quotation  is required</span>
+                <span style="color: red;" *ngIf="addmotorform.get('Quotation')?.getError('min')">Minimun Value is Zero</span>
+                <span style="color: red;" *ngIf="addmotorform.get('Quotation')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label>Personal Accident</label>
+            <input formControlName="PersonalAccident" min="0" type="number" class="form-control">
+            <div *ngIf="addmotorform.get('PersonalAccident')?.errors&& addmotorform.get('PersonalAccident')?.touched">
+                <span style="color: red;" *ngIf="addmotorform.get('PersonalAccident')?.getError('required')">Personal Accident  is required</span>
+                <span style="color: red;" *ngIf="addmotorform.get('PersonalAccident')?.getError('min')">Minimun Value is Zero</span>
+                <span style="color: red;" *ngIf="addmotorform.get('PersonalAccident')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label>Theft</label>
+            <input formControlName="Theft" min="0" type="number" class="form-control">
+            <div *ngIf="addmotorform.get('Theft')?.errors&& addmotorform.get('Theft')?.touched">
+                <span style="color: red;" *ngIf="addmotorform.get('Theft')?.getError('required')">Theft is required</span>
+                <span style="color: red;" *ngIf="addmotorform.get('Theft')?.getError('min')">Minimun Value is Zero</span>
+                <span style="color: red;" *ngIf="addmotorform.get('Theft')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label>Third Party Liability</label>
+            <input formControlName="ThirdPartyLiability" min="0" type="number" class="form-control">
+            <div *ngIf="addmotorform.get('ThirdPartyLiability')?.errors&& addmotorform.get('ThirdPartyLiability')?.touched">
+                <span style="color: red;" *ngIf="addmotorform.get('ThirdPartyLiability')?.getError('required')">Third Party Liability</span>
+                <span style="color: red;" *ngIf="addmotorform.get('ThirdPartyLiability')?.getError('min')">Minimun Value is Zero</span>
+                <span style="color: red;" *ngIf="addmotorform.get('ThirdPartyLiability')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label>Own Damage</label>
+            <input formControlName="OwnDamage" min="0" type="number" class="form-control">
+            <div *ngIf="addmotorform.get('OwnDamage')?.errors&& addmotorform.get('OwnDamage')?.touched">
+                <span style="color: red;" *ngIf="addmotorform.get('OwnDamage')?.getError('required')">Own Damage is required</span>
+                <span style="color: red;" *ngIf="addmotorform.get('OwnDamage')?.getError('min')">Minimun Value is Zero</span>
+                <span style="color: red;" *ngIf="addmotorform.get('OwnDamage')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label>Legal Expenses</label>
+            <input formControlName="LegalExpenses" min="0" type="number" class="form-control">
+            <div *ngIf="addmotorform.get('LegalExpenses')?.errors&& addmotorform.get('LegalExpenses')?.touched">
+                <span style="color: red;" *ngIf="addmotorform.get('LegalExpenses')?.getError('required')">Legal Expenses is required</span>
+                <span style="color: red;" *ngIf="addmotorform.get('LegalExpenses')?.getError('min')">Minimun Value is Zero</span>
+                <span style="color: red;" *ngIf="addmotorform.get('LegalExpenses')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+            </div>
+        </div>
+        <button [disabled]="addmotorform.invalid" type="submit" style="background-color: #011511 ; color:white ;font: bold;" class="btn btn-success w-25 d-block ms-auto">Add</button>
+    </form>
+</section>

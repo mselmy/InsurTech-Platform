@@ -1,3 +1,4 @@
+@import"../node_modules/bootstrap/dist/css/bootstrap.css";
 /* Order */
 @layer reset, bootstrap, primeng;
 
@@ -28,7 +29,16 @@
     /* Add other PrimeNG customizations here */
 }
 
-
+/*form-brder*/
+.form-border {
+    border: 3px solid   #5d7571   ;
+    padding: 15px;
+    border-radius: 5px;
+}
+/*btn-color*/
+.btn-colors{
+    background-color: #0A6847;
+}
 /* colors */
 
 .bgcwhite {

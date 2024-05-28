@@ -20,7 +20,7 @@ using Microsoft.VisualBasic;
 
 namespace insurtech.Companies
 {
-    public class CompanyAppService : AsyncCrudAppService<Company, CompanyDto, long, PagedAndSortedResultRequestDto, CreateCompanyInput, CompanyDto>, ICompanyAppService
+    public class CompanyAppService : AsyncCrudAppService<Company, CompanyDto, long, PagedCompanyResultRequestDto, CreateCompanyInput, CompanyDto>, ICompanyAppService
     {
 
         private readonly UserManager _userManager;
@@ -30,7 +30,6 @@ namespace insurtech.Companies
         {
             _userManager = userManager;
 			_emailSender= emailSender;
-
 
 		}
 
@@ -48,29 +47,29 @@ namespace insurtech.Companies
 
                 CheckErrors(await _userManager.CreateAsync(company,company.Password));
 
-				//await Repository.InsertAsync(company);
-				MailMessage mail = new MailMessage();
+				////await Repository.InsertAsync(company);
+				//MailMessage mail = new MailMessage();
 
-				mail.From = new MailAddress("myInsureTech@outlook.com");
-                mail.Subject = "welcome To InsureTech";
-                mail.Body = "hello";
-                mail.IsBodyHtml = true;
-                mail.To.Add(new MailAddress(company.EmailAddress));
+				//mail.From = new MailAddress("myInsureTech@outlook.com");
+    //            mail.Subject = "welcome To InsureTech";
+    //            mail.Body = "hello";
+    //            mail.IsBodyHtml = true;
+    //            mail.To.Add(new MailAddress(company.EmailAddress));
 
-                var smtp = new SmtpClient
-                {
-                    Host = "smtp-mail.outlook.com",
-                    //smtp.Host = "mohraapp.com";
-                    EnableSsl = true
-                };
-                NetworkCredential NetworkCred = new NetworkCredential();
-                NetworkCred.UserName = "myInsureTech@outlook.com";
-                NetworkCred.Password = "Ash@1234";
+    //            var smtp = new SmtpClient
+    //            {
+    //                Host = "smtp-mail.outlook.com",
+    //                //smtp.Host = "mohraapp.com";
+    //                EnableSsl = true
+    //            };
+    //            NetworkCredential NetworkCred = new NetworkCredential();
+    //            NetworkCred.UserName = "myInsureTech@outlook.com";
+    //            NetworkCred.Password = "Ash@1234";
 
-                smtp.Credentials = NetworkCred;
-                smtp.Port = 587;
+    //            smtp.Credentials = NetworkCred;
+    //            smtp.Port = 587;
 
-                await smtp.SendMailAsync(mail);
+    //            await smtp.SendMailAsync(mail);
 
 
 
