@@ -209,6 +209,7 @@ iframe {
 .container-login100 {
   background-color: #042521;
   width: 100%;
+  min-height: 100vh;
   min-height: fit-content;
   display: -webkit-box;
   display: -webkit-flex;
@@ -225,6 +226,7 @@ iframe {
 }
 
 .wrap-login100 {
+  height: 100%;
   width: 500px;
   background: #fff;
   border-radius: 10px;
