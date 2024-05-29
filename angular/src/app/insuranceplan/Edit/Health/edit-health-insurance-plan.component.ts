@@ -5,6 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EditHealthinsuranceModule } from '@app/models/healthinsurance/Edithealthinsurance.module';
+import { AppSessionService } from '@shared/session/app-session.service';
 
 @Component({
   selector: 'app-edit-health-insurance-plan',
@@ -20,7 +21,8 @@ export class EditHealthInsurancePlanComponent implements OnInit, OnDestroy {
 
   constructor(
     public healthService: HealthinsuranceService,
-    public activateRoute: ActivatedRoute) {}
+    public activateRoute: ActivatedRoute,
+    public apps:AppSessionService) {}
 
   ngOnInit(): void {
     this.sub = this.activateRoute.params.subscribe(param => {
@@ -81,7 +83,7 @@ export class EditHealthInsurancePlanComponent implements OnInit, OnDestroy {
         formValue.YearlyCoverage,
         formValue.InsuranceLevel,
         formValue.Quotation,
-        2, // Assuming CompanyId is fixed or obtained elsewhere
+        this.apps.userId,
         formValue.MedicalNetwork,
         formValue.ClinicsCoverage,
         formValue.HospitalizationAndSurgery,

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { HomeinsuranceService } from '@app/services/homeinsurance.service';
 import { ActivatedRoute } from '@angular/router';
+import { AppSessionService } from '@shared/session/app-session.service';
 
 
 
@@ -23,7 +24,8 @@ export class EditHomeInsurancePlanComponent implements OnInit, OnDestroy {
 
   constructor(
     public homeservices: HomeinsuranceService,
-    public activateRoute: ActivatedRoute) {}
+    public activateRoute: ActivatedRoute,
+    public apps:AppSessionService ) {}
 
   ngOnInit(): void {
     this.sub = this.activateRoute.params.subscribe(param => {
@@ -84,7 +86,7 @@ export class EditHomeInsurancePlanComponent implements OnInit, OnDestroy {
         formValue.YearlyCoverage,
         formValue.InsuranceLevel,
         formValue.Quotation,
-        2, // Assuming CompanyId is fixed or obtained elsewhere
+        this.apps.userId,
         formValue.WaterDamage,
         formValue.GlassBreakage,
         formValue.NaturalHazard,

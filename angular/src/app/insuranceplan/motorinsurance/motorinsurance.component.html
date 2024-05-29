@@ -12,13 +12,13 @@
         </div>
         <div class="mb-2">
             <label>Insurance Level</label>
-            <select formControlName="InsuranceLevel" class="form-control">
+            <select formControlName="Level" class="form-control">
                 <option value="0">Basic</option>
                 <option value="1">Standard</option>
                 <option value="2">Premium</option>
             </select>
-            <div *ngIf="addmotorform.get('InsuranceLevel')?.errors&& addmotorform.get('InsuranceLevel')?.touched">
-                <span style="color: red;" *ngIf="addmotorform.get('InsuranceLevel')?.getError('required')">Insurance Level</span>
+            <div *ngIf="addmotorform.get('Level')?.errors&& addmotorform.get('Level')?.touched">
+                <span style="color: red;" *ngIf="addmotorform.get('Level')?.getError('required')">Insurance Level</span>
             </div>
         </div>
         <div class="mb-2">

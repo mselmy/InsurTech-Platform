@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MotorinsuranceService } from '../../services/motorinsurance.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MotorinsuranceModule } from '@app/models/motorinsurance/motorinsurance.module';
+import { AddMotorInsurancePlan } from '@app/models/motorinsurance/AddMotorInsurance.module';
+import { AppSessionService } from '@shared/session/app-session.service';
 
 @Component({
   selector: 'app-motorinsurance',
@@ -14,12 +15,8 @@ import { MotorinsuranceModule } from '@app/models/motorinsurance/motorinsurance.
 export class MotorinsuranceComponent {
   addmotorform: FormGroup = new FormGroup({
     YearlyCoverage: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(1.7976931348623157e+308)]),
-    categoryName: new FormControl('', [Validators.required]), // Add this
-    companyName: new FormControl('', [Validators.required]), // Add this
-    requestNumber: new FormControl(null, [Validators.required]), // Add this
     Level: new FormControl(0, [Validators.required]), // Rename to Level
     Quotation: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(1.7976931348623157e+308)]),
-    CompanyId: new FormControl(null, [Validators.required]), // Add this
     PersonalAccident: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(1.7976931348623157e+308)]),
     Theft: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(1.7976931348623157e+308)]),
     ThirdPartyLiability: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(1.7976931348623157e+308)]),
@@ -27,29 +24,44 @@ export class MotorinsuranceComponent {
     LegalExpenses: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(1.7976931348623157e+308)]),
   });
 
-  constructor(public motorservice: MotorinsuranceService) {}
+  constructor(public motorservice: MotorinsuranceService,public apps:AppSessionService) {}
 
+  updateFormWithData(): void {
+
+    this.addmotorform.patchValue({
+      YearlyCoverage: null,
+      InsuranceLevel:null,
+      Quotation: null,
+      PersonalAccident: null,
+      Theft: null,
+      ThirdPartyLiability: null,
+      OwnDamage: null,
+      LegalExpenses:null
+    });
+  }
+  
   addmotor() {
     if (this.addmotorform.valid) {
       const formValue = this.addmotorform.value;
-      const newaddmotor: MotorinsuranceModule = new MotorinsuranceModule(
+      debugger;
+      const newaddmotor: AddMotorInsurancePlan = new AddMotorInsurancePlan(
         formValue.YearlyCoverage,
-        formValue.categoryName,
-        formValue.companyName,
-        formValue.requestNumber,
         formValue.Level,
         formValue.Quotation,
-        formValue.CompanyId,
+        this.apps.userId,
         formValue.PersonalAccident,
         formValue.Theft,
         formValue.ThirdPartyLiability,
         formValue.OwnDamage,
-        formValue.legalExpenses
+        formValue.LegalExpenses
+        
       );
       console.log('Payload:', newaddmotor);
+
       this.motorservice.addmotor(newaddmotor).subscribe(
         response => {
           console.log('Motor insurance added successfully', response);
+          this.updateFormWithData();
         },
         error => {
           console.error('Error adding motor insurance', error);

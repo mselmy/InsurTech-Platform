@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HealthinsuranceService } from '../../services/healthinsurance.service';
 import { HealthinsuranceModule } from '../../models/healthinsurance/healthinsurance.module';
+import { AppSessionService } from '@shared/session/app-session.service';
 
 @Component({
   selector: 'app-healthinsurance',
@@ -23,7 +24,21 @@ export class HealthinsuranceComponent {
     DentalCoverage: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(1.7976931348623157e+308)])
   });
 
-  constructor(public healthService: HealthinsuranceService) {}
+  constructor(public healthService: HealthinsuranceService,public apps:AppSessionService) {}
+
+  updateFormWithData(): void {
+    // Patch the form controls with the data
+    this.addhealthform.patchValue({
+      YearlyCoverage: null,
+      InsuranceLevel: null,
+      Quotation: null,
+      MedicalNetwork: null,
+      ClinicsCoverage: null,
+      HospitalizationAndSurgery:null,
+      OpticalCoverage: null,
+      DentalCoverage: null
+    });
+  }
 
   addhealth() {
     if (this.addhealthform.valid) {
@@ -32,7 +47,7 @@ export class HealthinsuranceComponent {
         formValue.YearlyCoverage,
         formValue.InsuranceLevel,
         formValue.Quotation,
-        2, // Assuming CompanyId is fixed or obtained elsewhere
+       this.apps.userId,
         formValue.MedicalNetwork,
         formValue.ClinicsCoverage,
         formValue.HospitalizationAndSurgery,
@@ -45,6 +60,7 @@ export class HealthinsuranceComponent {
       this.healthService.add(healthObj).subscribe(
         response => {
           console.log('Health insurance added successfully', response);
+          this.updateFormWithData();
         },
         error => {
           console.error('Error adding health insurance', error);

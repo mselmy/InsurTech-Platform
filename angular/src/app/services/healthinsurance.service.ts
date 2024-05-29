@@ -19,10 +19,11 @@ export class HealthinsuranceService {
     return this.http.post<any>(`${this.baseurl}Create`, healthinsurance);
   }
 Edit(healthinsurance: EditHealthinsuranceModule):Observable<any>{
-  
+  debugger;
   return this.http.put<any>(`${this.baseurl}Update`, healthinsurance);
 }
 GetById(id:number):Observable<any>{
+  debugger;
   return this.http.get<any>(`${this.baseurl}Get`, { params: { Id: id.toString() } })
       .pipe(
         map(response => response.result)  

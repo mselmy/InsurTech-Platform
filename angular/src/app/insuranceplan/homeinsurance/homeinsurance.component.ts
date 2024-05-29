@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { HomeinsuranceService } from '../../services/homeinsurance.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HomeinsuranceModule } from '../../models/homeinsurance/homeinsurance.module'; // Corrected import path
+import { AppSessionService } from '@shared/session/app-session.service';
 
 @Component({
   selector: 'app-homeinsurance',
@@ -23,7 +24,20 @@ export class HomeinsuranceComponent {
     FiresAndExplosion: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(1.7976931348623157e+308)])
   });
 
-  constructor(public homeinsuranceService: HomeinsuranceService) {}
+  constructor(public homeinsuranceService: HomeinsuranceService,public apps:AppSessionService) {}
+
+  updateFormWithData(): void {
+    this.addhomeinsurance.patchValue({
+      YearlyCoverage: null,
+      InsuranceLevel: null,
+      Quotation: null,
+      WaterDamage: null,
+      GlassBreakage: null,
+      NaturalHazard: null,
+      AttemptedTheft: null,
+      FiresAndExplosion: null
+    });
+  }
 
   addhome() {
     if (this.addhomeinsurance.valid) {
@@ -32,7 +46,7 @@ export class HomeinsuranceComponent {
         formValue.YearlyCoverage,
         formValue.InsuranceLevel,
         formValue.Quotation,
-        2, // Assuming CompanyId is fixed or obtained elsewhere
+       this.apps.userId,
         formValue.WaterDamage,
         formValue.GlassBreakage,
         formValue.NaturalHazard,
@@ -45,6 +59,7 @@ export class HomeinsuranceComponent {
       this.homeinsuranceService.add(newAdd).subscribe(
         response => {
           console.log('Home insurance added successfully', response);
+          this.updateFormWithData();
         },
         error => {
           console.error('Error adding home insurance', error);

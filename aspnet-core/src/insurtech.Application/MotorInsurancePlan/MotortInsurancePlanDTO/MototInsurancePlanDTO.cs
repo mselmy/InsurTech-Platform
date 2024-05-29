@@ -15,15 +15,18 @@ namespace insurtech.MotorInsurancePlan.MotortInsurancePlanDTO
     {
         public decimal YearlyCoverage { get; set; }
         public InsurancePlanLevel Level { get; set; }
-        public string CategoryName { get; set; }
+        //public string CategoryName { get; set; }
         public decimal Quotation { get; set; }
-        public string CompanyName { get; set; }
+        //public string CompanyName { get; set; }
         public decimal PersonalAccident { get; set; }
         public decimal Theft { get; set; }
         public decimal ThirdPartyLiability { get; set; }
         public decimal OwnDamage { get; set; }
         public decimal LegalExpenses { get; set; }
-        public int RequestNumber { get; set; }
+        //public int RequestNumber { get; set; }
+        public long companyId { get; set; }
+        public long categoryId { get; set; }
+        public long Id { set; get; }
 
     }
 }

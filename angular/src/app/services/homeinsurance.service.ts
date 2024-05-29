@@ -21,10 +21,11 @@ private baseurl:string="https://localhost:44311/api/services/app/HomeInsurancePl
     return this.httpclinte.post<any>(`${this.baseurl}Create`, homeinsurance);
   }
   Edit(homeinsurance: EditHomeinsuranceModule):Observable<any>{
-  
+    debugger;
     return this.httpclinte.put<any>(`${this.baseurl}Update`, homeinsurance);
   }
   GetById(id:number):Observable<any>{
+    debugger;
     return this.httpclinte.get<any>(`${this.baseurl}Get`, { params: { Id: id.toString() } })
         .pipe(
           map(response => response.result)  

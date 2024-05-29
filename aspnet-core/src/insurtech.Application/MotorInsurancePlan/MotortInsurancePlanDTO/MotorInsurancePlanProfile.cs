@@ -15,9 +15,9 @@ namespace insurtech.MotorInsurancePlan.MotortInsurancePlanDTO
         public MotorInsurancePlanProfile()
         {
             CreateMap<MototInsurancePlanDTO, Models.MotorInsurancePlan>().ReverseMap()
-            .ForMember(dest => dest.CompanyName, opt => opt.MapFrom<CompanyNameResolver>())
-            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom<CategoryNameResolver>())
-            .ForMember(dest => dest.RequestNumber, opt => opt.MapFrom<RequestNumberResolver>());
+            //.ForMember(dest => dest.CompanyName, opt => opt.MapFrom<CompanyNameResolver>())
+            //.ForMember(dest => dest.CategoryName, opt => opt.MapFrom<CategoryNameResolver>())
+            //.ForMember(dest => dest.RequestNumber, opt => opt.MapFrom<RequestNumberResolver>());
             ;
             CreateMap<Models.MotorInsurancePlan, CreatedMotorInsurancePlanDTO>().ReverseMap();
             CreateMap<Models.MotorInsurancePlan, UpdatedMotorInsurancePlanDTO>().ReverseMap();
