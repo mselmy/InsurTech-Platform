@@ -12,7 +12,7 @@ import { EditHomeinsuranceModule } from '@app/models/homeinsurance/Edithomeinsur
   providedIn: 'root'
 })
 export class HomeinsuranceService {
-private baseurl:string="https://localhost:44311/api/services/app/HomeInsurancePlanService/Create";
+private baseurl:string="https://localhost:44311/api/services/app/HomeInsurancePlanService/";
   constructor(public httpclinte :HttpClient ) {
 
    }
