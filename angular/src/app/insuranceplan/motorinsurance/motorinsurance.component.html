@@ -1,5 +1,6 @@
+<p>motorinsurance works!</p>
 <section class="p-4 rounded my-3 w-50 mx-auto ">
-    <form class="form-border"  [formGroup]="addmotorform"  (ngSubmit)="addmotor()">
+    <form  [formGroup]="addmotorform"  (ngSubmit)="addmotor()">
         <div class="mb-2">
             <label for="YearlyCoverage">Yearly Coverage</label>
             <input  formControlName="YearlyCoverage" min="0" id="YearlyCoverage" type="number" class="form-control">
@@ -11,13 +12,13 @@
         </div>
         <div class="mb-2">
             <label>Insurance Level</label>
-            <select formControlName="InsuranceLevel" class="form-control">
+            <select formControlName="Level" class="form-control">
                 <option value="0">Basic</option>
                 <option value="1">Standard</option>
                 <option value="2">Premium</option>
             </select>
-            <div *ngIf="addmotorform.get('InsuranceLevel')?.errors&& addmotorform.get('InsuranceLevel')?.touched">
-                <span style="color: red;" *ngIf="addmotorform.get('InsuranceLevel')?.getError('required')">Insurance Level</span>
+            <div *ngIf="addmotorform.get('Level')?.errors&& addmotorform.get('Level')?.touched">
+                <span style="color: red;" *ngIf="addmotorform.get('Level')?.getError('required')">Insurance Level</span>
             </div>
         </div>
         <div class="mb-2">
@@ -74,6 +75,6 @@
                 <span style="color: red;" *ngIf="addmotorform.get('LegalExpenses')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
             </div>
         </div>
-        <button [disabled]="addmotorform.invalid" type="submit" style="background-color: #011511 ; color:white ;font: bold;" class="btn btn-success w-25 d-block ms-auto">Add</button>
+        <button [disabled]="addmotorform.invalid" type="submit" class="btn btn-success d-block ms-auto">Add</button>
     </form>
 </section>
