@@ -1,27 +1,26 @@
-import { Component, Injector, OnInit } from '@angular/core';
+
+import { Component, Injector } from '@angular/core';
 import { AbpSessionService } from 'abp-ng2-module';
 import { AppComponentBase } from '@shared/app-component-base';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
 import { AppAuthService } from '@shared/auth/app-auth.service';
-import { Console } from 'console';
+import { AccountService } from '../../app/services/account.service'; // Adjust the path accordingly
+
 
 @Component({
   templateUrl: './login.component.html',
   animations: [accountModuleAnimation()]
 })
-export class LoginComponent extends AppComponentBase implements OnInit {
+export class LoginComponent extends AppComponentBase {
   submitting = false;
-  userId: number | null = null;
 
   constructor(
     injector: Injector,
     public authService: AppAuthService,
-    private _sessionService: AbpSessionService
+    private _sessionService: AbpSessionService,
+    public _accuntservice:AccountService
   ) {
     super(injector);
-  }
-  ngOnInit() {
-   
   }
 
   get multiTenancySideIsTeanant(): boolean {
@@ -40,4 +39,16 @@ export class LoginComponent extends AppComponentBase implements OnInit {
     this.submitting = true;
     this.authService.authenticate(() => (this.submitting = false));
   }
+
+  loginWithGoogle(): void {
+    this._accuntservice.loginWithGoogle().subscribe((response) => {
+    console.log(response);
+    
+      // Handle the response as needed
+    }, (error) => {
+      // Handle errors
+    });
+  }
+
+
 }
