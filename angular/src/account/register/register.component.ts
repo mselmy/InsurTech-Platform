@@ -9,11 +9,12 @@ import {
 } from "@shared/service-proxies/service-proxies";
 import { accountModuleAnimation } from "@shared/animations/routerTransition";
 import { AppAuthService } from "@shared/auth/app-auth.service";
+import { CompanyService, Company } from "@app/app/_service/company.service"; // Import CompanyService
 
 @Component({
   templateUrl: "./register.component.html",
   animations: [accountModuleAnimation()],
-  styleUrls: ["./register.component.css"], // Corrected to styleUrls
+  styleUrls: ["./register.component.css"],
 })
 export class RegisterComponent extends AppComponentBase {
   model: RegisterInput = new RegisterInput();
@@ -23,7 +24,8 @@ export class RegisterComponent extends AppComponentBase {
     injector: Injector,
     private _accountService: AccountServiceProxy,
     private _router: Router,
-    private authService: AppAuthService
+    private authService: AppAuthService,
+    private companyService: CompanyService // Inject CompanyService
   ) {
     super(injector);
   }
@@ -52,6 +54,34 @@ export class RegisterComponent extends AppComponentBase {
         this.authService.authenticate(() => {
           this.saving = false;
         });
+
+        // Create company after successful registration
+        this.createCompany();
       });
+  }
+
+  createCompany(): void {
+    const newCompany: Company = {
+      name: this.model.name, // Adjust if necessary
+      userName: this.model.userName,
+      emailAddress: this.model.emailAddress,
+      password: this.model.password,
+      taxNumber: this.model.taxNumber,
+      location: this.model.location,
+      phoneNumber: this.model.phoneNumber,
+    };
+
+    this.companyService.createCompany(newCompany).subscribe(
+      (response) => {
+        console.log("Company created", response);
+      },
+      (error) => {
+        console.error("Error creating company", error);
+      }
+    );
+  }
+
+  onSubmit(): void {
+    this.save();
   }
 }
