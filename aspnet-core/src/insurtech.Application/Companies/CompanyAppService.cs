@@ -9,7 +9,9 @@ using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
 using Abp.IdentityFramework;
+using Abp.Localization;
 using Abp.Net.Mail;
+using AutoMapper.Internal.Mappers;
 using Castle.Components.DictionaryAdapter.Xml;
 using insurtech.Authorization.Users;
 using insurtech.Companies.Dto;
@@ -24,19 +26,12 @@ namespace insurtech.Companies
     {
 
         private readonly UserManager _userManager;
-        private readonly IEmailSender _emailSender;
 
-        public CompanyAppService(IRepository<Company, long> repository,UserManager userManager, IEmailSender emailSender) : base(repository)
+        public CompanyAppService(IRepository<Company, long> repository,UserManager userManager) : base(repository)
         {
             _userManager = userManager;
-			_emailSender= emailSender;
 
 		}
-
-
-
-
-
 
         public override async Task<CompanyDto> CreateAsync(CreateCompanyInput input)
         {
@@ -47,29 +42,31 @@ namespace insurtech.Companies
 
                 CheckErrors(await _userManager.CreateAsync(company,company.Password));
 
-				////await Repository.InsertAsync(company);
-				//MailMessage mail = new MailMessage();
 
-				//mail.From = new MailAddress("myInsureTech@outlook.com");
-    //            mail.Subject = "welcome To InsureTech";
-    //            mail.Body = "hello";
-    //            mail.IsBodyHtml = true;
-    //            mail.To.Add(new MailAddress(company.EmailAddress));
+				//await Repository.InsertAsync(company);
+				MailMessage mail = new MailMessage();
 
-    //            var smtp = new SmtpClient
-    //            {
-    //                Host = "smtp-mail.outlook.com",
-    //                //smtp.Host = "mohraapp.com";
-    //                EnableSsl = true
-    //            };
-    //            NetworkCredential NetworkCred = new NetworkCredential();
-    //            NetworkCred.UserName = "myInsureTech@outlook.com";
-    //            NetworkCred.Password = "Ash@1234";
+				mail.From = new MailAddress("myInsureTech@outlook.com");
+				mail.Subject = "please work Cna";
+				mail.Body = "working";
+				mail.IsBodyHtml = true;
+				mail.To.Add(new MailAddress(company.EmailAddress));
 
-    //            smtp.Credentials = NetworkCred;
-    //            smtp.Port = 587;
+				var smtp = new SmtpClient
+				{
+					Host = "smtp-mail.outlook.com",
+					//smtp.Host = "mohraapp.com";
+					EnableSsl = true
+				};
+				NetworkCredential NetworkCred = new NetworkCredential();
+				NetworkCred.UserName = "myInsureTech@outlook.com";
+				NetworkCred.Password = "Ash@1234";
 
-    //            await smtp.SendMailAsync(mail);
+				smtp.Credentials = NetworkCred;
+				smtp.Port = 587;
+
+				await smtp.SendMailAsync(mail);
+				Logger.Info("Email sent successfully.");
 
 
 
@@ -78,7 +75,7 @@ namespace insurtech.Companies
 
 				return MapToEntityDto(company);
 
-        }
+			}
             catch (Exception ex)
             {
 
@@ -110,3 +107,9 @@ namespace insurtech.Companies
         }
     }
 }
+
+
+
+
+	
+
