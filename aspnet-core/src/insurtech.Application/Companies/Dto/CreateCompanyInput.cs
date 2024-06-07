@@ -22,8 +22,7 @@ namespace insurtech.Companies.Dto
         [StringLength(AbpUserBase.MaxNameLength)]
         public string Name { get; set; }
         [Required]
-        [StringLength(AbpUserBase.MaxNameLength)]
-        [RegularExpression(@"^[a-zA-Z][a-zA-Z0-9]*$", ErrorMessage = "Invalid UserName")]
+        [StringLength(256)]
 
         public string UserName { get; set; }
         [Required]
