@@ -5,9 +5,9 @@ import { RegisterComponent } from './register/register.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet ,RegisterComponent],
+  imports: [RouterOutlet, RegisterComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'insurance-Project';
