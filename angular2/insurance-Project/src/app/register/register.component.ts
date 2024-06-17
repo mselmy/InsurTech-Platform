@@ -35,7 +35,7 @@ export class RegisterComponent {
   ) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
-      userName: ['', [Validators.required], [this.uniqueUsernameValidator()]],
+      userName: ['', [Validators.required]],
       emailAddress: ['', [Validators.required, Validators.email]],
       password: [
         '',
@@ -59,22 +59,6 @@ export class RegisterComponent {
       return { passwordStrength: true };
     }
     return null;
-  }
-
-  uniqueUsernameValidator(): AsyncValidatorFn {
-    return (
-      control: AbstractControl
-    ): Observable<{ [key: string]: any } | null> => {
-      return of(control.value).pipe(
-        debounceTime(300),
-        switchMap((value) =>
-          this.registrationService.checkUsernameUnique(value).pipe(
-            map((isUnique) => (isUnique ? null : { uniqueUsername: true })),
-            catchError(() => of(null))
-          )
-        )
-      );
-    };
   }
 
   onSubmit() {
