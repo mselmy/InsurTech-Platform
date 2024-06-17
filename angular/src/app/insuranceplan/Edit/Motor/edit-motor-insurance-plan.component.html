@@ -1,0 +1,88 @@
+<section class="p-4 rounded my-3 w-100 mx-auto">
+  <section class="sign-in">
+    <div class="container">
+      <div class="signin-content " style="display: flex;">
+        <div class="signin-image">
+          <figure style="margin-top: 50%; width:100%;"><img src="../../../../assets/img/carinsurance.png" alt="sign up image"></figure>
+        </div>
+        <div class="signin-form">
+          <form [formGroup]="Editmotorform" (ngSubmit)="EditHealth()">
+            <div class="mb-2">
+              <label for="YearlyCoverage">Yearly Coverage</label>
+              <input formControlName="YearlyCoverage" min="0" id="YearlyCoverage" type="number" class="form-control">
+              <div *ngIf="Editmotorform.get('YearlyCoverage')?.errors && Editmotorform.get('YearlyCoverage')?.touched">
+                <span style="color: red;" *ngIf="Editmotorform.get('YearlyCoverage')?.getError('required')">Yearly Coverage is required</span>
+                <span style="color: red;" *ngIf="Editmotorform.get('YearlyCoverage')?.getError('min')">Minimum Value is Zero</span>
+                <span style="color: red;" *ngIf="Editmotorform.get('YearlyCoverage')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+              </div>
+            </div>
+            <div class="mb-2">
+              <label>Insurance Level</label>
+              <select formControlName="Level" class="form-control">
+                <option value="0">Basic</option>
+                <option value="1">Standard</option>
+                <option value="2">Premium</option>
+              </select>
+              <div *ngIf="Editmotorform.get('Level')?.errors && Editmotorform.get('Level')?.touched">
+                <span style="color: red;" *ngIf="Editmotorform.get('Level')?.getError('required')">Insurance Level is required</span>
+              </div>
+            </div>
+            <div class="mb-2">
+              <label>Quotation</label>
+              <input formControlName="Quotation" min="0" type="number" class="form-control">
+              <div *ngIf="Editmotorform.get('Quotation')?.errors && Editmotorform.get('Quotation')?.touched">
+                <span style="color: red;" *ngIf="Editmotorform.get('Quotation')?.getError('required')">Quotation is required</span>
+                <span style="color: red;" *ngIf="Editmotorform.get('Quotation')?.getError('min')">Minimum Value is Zero</span>
+                <span style="color: red;" *ngIf="Editmotorform.get('Quotation')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+              </div>
+            </div>
+            <div class="mb-2">
+              <label>Theft</label>
+              <input formControlName="Theft" min="0" type="number" class="form-control">
+              <div *ngIf="Editmotorform.get('Theft')?.errors && Editmotorform.get('Theft')?.touched">
+                <span style="color: red;" *ngIf="Editmotorform.get('Theft')?.getError('required')">Theft is required</span>
+              </div>
+            </div>
+            <div class="mb-2">
+              <label>Legal Expenses</label>
+              <input formControlName="LegalExpenses" min="0" type="number" class="form-control">
+              <div *ngIf="Editmotorform.get('LegalExpenses')?.errors && Editmotorform.get('LegalExpenses')?.touched">
+                <span style="color: red;" *ngIf="Editmotorform.get('LegalExpenses')?.getError('required')">Legal Expenses is required</span>
+                <span style="color: red;" *ngIf="Editmotorform.get('LegalExpenses')?.getError('min')">Minimum Value is Zero</span>
+                <span style="color: red;" *ngIf="Editmotorform.get('LegalExpenses')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+              </div>
+            </div>
+            <div class="mb-2">
+              <label>Own Damage</label>
+              <input formControlName="OwnDamage" min="0" type="number" class="form-control">
+              <div *ngIf="Editmotorform.get('OwnDamage')?.errors && Editmotorform.get('OwnDamage')?.touched">
+                <span style="color: red;" *ngIf="Editmotorform.get('OwnDamage')?.getError('required')">Own Damage is required</span>
+                <span style="color: red;" *ngIf="Editmotorform.get('OwnDamage')?.getError('min')">Minimum Value is Zero</span>
+                <span style="color: red;" *ngIf="Editmotorform.get('OwnDamage')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+              </div>
+            </div>
+            <div class="mb-2">
+              <label>Personal Accident</label>
+              <input formControlName="PersonalAccident" min="0" type="number" class="form-control">
+              <div *ngIf="Editmotorform.get('PersonalAccident')?.errors && Editmotorform.get('PersonalAccident')?.touched">
+                <span style="color: red;" *ngIf="Editmotorform.get('PersonalAccident')?.getError('required')">Personal Accident is required</span>
+                <span style="color: red;" *ngIf="Editmotorform.get('PersonalAccident')?.getError('min')">Minimum Value is Zero</span>
+                <span style="color: red;" *ngIf="Editmotorform.get('PersonalAccident')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+              </div>
+            </div>
+            <div class="mb-2">
+              <label>Third Party Liability</label>
+              <input formControlName="ThirdPartyLiability" min="0" type="number" class="form-control">
+              <div *ngIf="Editmotorform.get('ThirdPartyLiability')?.errors && Editmotorform.get('ThirdPartyLiability')?.touched">
+                <span style="color: red;" *ngIf="Editmotorform.get('ThirdPartyLiability')?.getError('required')">Third Party Liability is required</span>
+                <span style="color: red;" *ngIf="Editmotorform.get('ThirdPartyLiability')?.getError('min')">Minimum Value is Zero</span>
+                <span style="color: red;" *ngIf="Editmotorform.get('ThirdPartyLiability')?.getError('max')">Maximum Value is 1.7976931348623157e+308</span>
+              </div>
+            </div>
+            <button [disabled]="Editmotorform.invalid" type="submit" class="btn btn-success d-block ms-auto">Edit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
